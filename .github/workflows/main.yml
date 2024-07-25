@@ -71,11 +71,10 @@ jobs:
 
       - name: Build Android app
         run: |
-           flutter build apk --release --split-per-abi --obfuscate --split-debug-info=build/app/outputs/symbols \
-           --dart-define=KEYSTORE_FILE=${{ secrets.KEYSTORE_FILE }} \
-           --dart-define=KEYSTORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }} \
-           --dart-define=KEY_ALIAS=${{ secrets.KEY_ALIAS }} \
-           --dart-define=KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}
+           flutter build apk --release --split-per-abi --obfuscate --split-debug-info=build/app/outputs/symbols &&
+           echo "STARTING APP SIGN" 
+           apksigner sign --ks ${{ secrets.KEYSTORE_FILE }} --ks-key-alias ${{ secrets.KEY_ALIAS }} --ks-pass pass:${{ secrets.KEYSTORE_PASSWORD }} --key-pass pass:${{ secrets.KEY_PASSWORD }} build/app/outputs/flutter-apk/app-arm64-v8a-release.apk 
+
 
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2

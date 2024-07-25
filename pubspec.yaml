@@ -47,7 +47,6 @@ dependencies:
   flutter_svg: ^1.1.6
   gap: ^3.0.1
   get: ^4.6.6
-  google_fonts: ^6.2.1
   google_sign_in: ^6.2.1
   http: ^1.2.2
   image_picker: ^1.1.2
@@ -88,10 +87,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/Quicksand.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
