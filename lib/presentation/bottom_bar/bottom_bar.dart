@@ -115,7 +115,7 @@ class _FluidBottomBarState extends State with SingleTickerProviderStateMixin {
 
               //          // iconUnselectedForegroundColor: Colors.white,
               // iconSelectedForegroundColor: AppColors.lightBlue,
-              barBackgroundColor: AppColors.bottomBarbgClr()),
+              barBackgroundColor: AppColors.bottomBarBgClr()),
           scaleFactor: 1,
           defaultIndex: 0,
           itemBuilder: (icon, item) => Semantics(

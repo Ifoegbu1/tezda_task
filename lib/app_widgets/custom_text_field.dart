@@ -162,6 +162,7 @@ class CustomTextFormField extends StatelessWidget {
       prefixIconConstraints: prefixConstraints,
       suffixIcon: suffix,
       isCollapsed: false,
+      errorStyle: AppStyle.txtQuicksand.copyWith(fontSize: 13),
 
       suffixIconConstraints: suffixConstraints,
       filled: isFilled ?? false,

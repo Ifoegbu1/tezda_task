@@ -35,7 +35,10 @@ class _LoginOrRegState extends State<LoginOrReg> {
 
   @override
   void dispose() {
-    widget.authCtr.dispose();
+    Future.delayed(
+      2.seconds,
+      () => widget.authCtr.dispose(),
+    );
     super.dispose();
   }
 
@@ -61,7 +64,7 @@ class _LoginOrRegState extends State<LoginOrReg> {
                     tag: 'email',
                     child: Center(
                       child: Icon(
-                        Icons.email_rounded,
+                        Icons.login,
                         color: AppColors.lightBlue,
                         size: 80,
                       ),
@@ -183,6 +186,7 @@ class _LoginOrRegState extends State<LoginOrReg> {
                     borderRadius: 20,
                     text: widget.isSignUp ? 'Sign Up' : 'Sign In',
                     onTap: () {
+                      FocusScope.of(context).unfocus();
                       if (formKey.currentState!.validate()) {
                         if (widget.isSignUp) {
                           widget.authCtr.signUpWithEmail(context);

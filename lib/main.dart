@@ -27,7 +27,7 @@ Future<void> main() async {
   ]);
   runApp(
     DevicePreview(
-      enabled: kDebugMode,
+      enabled: false,
       tools: [
         ...DevicePreview.defaultTools,
         DevicePreviewScreenshot(

@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tezda_task/app_widgets/custom_image_view.dart';
 import 'package:tezda_task/app_widgets/custom_photoview.dart';
+import 'package:tezda_task/app_widgets/generic_dialog.dart';
 import 'package:tezda_task/core/generics.dart';
 import 'package:tezda_task/presentation/auth/auth_controller.dart';
 import 'package:tezda_task/presentation/user/controller/user_controller.dart';
 import 'package:tezda_task/presentation/user/screens/profile_screen.dart';
-import 'package:tezda_task/presentation/user/widgets/logout_dialog.dart';
 import 'package:tezda_task/presentation/user/widgets/user_item.dart';
 import 'package:tezda_task/theme/app_style.dart';
 import 'package:tezda_task/utils/app_colors.dart';
@@ -207,13 +207,13 @@ class AccountPage extends StatelessWidget {
                           title: 'Log Out',
                           icon: Icons.logout,
                           onTap: () {
-                            Get.dialog(
-                              LogoutDialog(
-                                onYes: () {
-                                  authCtr.logout();
-                                },
-                              ),
-                            );
+                            Get.dialog(GenericDialog(
+                              icon: Icons.logout,
+                              content: 'Are you sure you want to log out?',
+                              confirmText: 'Yes',
+                              cancelText: 'No',
+                              onYes: () => authCtr.logout(),
+                            ));
                           },
                         ),
                       ],

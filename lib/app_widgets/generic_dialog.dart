@@ -5,10 +5,18 @@ import 'package:tezda_task/theme/app_style.dart';
 import 'package:tezda_task/utils/app_colors.dart';
 import 'package:tezda_task/utils/app_functions.dart';
 
-class LogoutDialog extends StatelessWidget {
+class GenericDialog extends StatelessWidget {
+  final IconData icon;
+  final String content;
+  final String confirmText;
+  final String cancelText;
   final Function() onYes;
-  const LogoutDialog({
+  const GenericDialog({
     super.key,
+    required this.icon,
+    required this.content,
+    required this.confirmText,
+    required this.cancelText,
     required this.onYes,
   });
 
@@ -23,26 +31,28 @@ class LogoutDialog extends StatelessWidget {
       icon: CircleAvatar(
         maxRadius: 33,
         backgroundColor: AppColors.lightBlue,
-        child: const Icon(
-          Icons.logout,
+        child: Icon(
+          icon,
           size: 30,
         ),
       ),
-      content: Text('Are you sure you want to log out?',
-          style: AppStyle.txtQuicksand),
+      content: Text(
+        content,
+        style: AppStyle.txtQuicksand,
+        textAlign: TextAlign.center,
+      ),
       actionsAlignment: MainAxisAlignment.spaceAround,
       actions: [
         CustomElevatedButton(
-          backgroundColor: const Color.fromRGBO(248, 251, 255, 1),
+          backgroundColor: AppColors.containerClr(),
+          // backgroundColor: const Color.fromRGBO(248, 251, 255, 1),
           // fixedSize: Size(125.0.dynW, 83.0.dynH),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           child: Text(
-            'No',
+            cancelText,
             style: AppStyle.txtQuicksand,
           ),
-          onPressed: () {
-            Get.back();
-          },
+          onPressed: () => Get.back(),
         ),
         CustomElevatedButton(
           // fixedSize: Size(125.0.dynW, 83.0.dynH),
@@ -52,9 +62,9 @@ class LogoutDialog extends StatelessWidget {
           backgroundColor: AppColors.lightBlue,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           onPressed: onYes,
-          child: const Text(
-            'Yes',
-            style: TextStyle(color: Colors.white),
+          child: Text(
+            confirmText,
+            style: const TextStyle(color: Colors.white),
           ),
         ),
       ],

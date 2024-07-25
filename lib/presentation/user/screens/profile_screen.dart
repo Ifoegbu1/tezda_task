@@ -57,57 +57,8 @@ class ProfileScreen extends StatelessWidget {
                   isScrollControlled: true,
                   context: context,
                   builder: (context) {
-                    return Padding(
-                      padding: EdgeInsets.only(
-                        right: 20,
-                        left: 20,
-                        top: 20,
-                        bottom: MediaQuery.of(context).viewInsets.bottom,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Enter your name',
-                            style: AppStyle.txtQuicksand,
-                          ),
-                          TextFormField(
-                            style: AppStyle.txtQuicksand,
-                            controller: nameTxtCtr,
-                            autofocus: true,
-                          ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const SizedBox(),
-                                Row(
-                                  children: [
-                                    TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text(
-                                          'Cancel',
-                                          style: AppStyle.txtQuicksand,
-                                        )),
-                                    TextButton(
-                                        onPressed: () =>
-                                            userCtr.changeName(nameTxtCtr.text),
-                                        child: Text(
-                                          'Save',
-                                          style: AppStyle.txtQuicksand,
-                                        )),
-                                  ],
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    );
+                    return EditNameTField(
+                        nameTxtCtr: nameTxtCtr, userCtr: userCtr);
                   },
                 );
               },
@@ -192,5 +143,86 @@ class ProfileScreen extends StatelessWidget {
                 ),
               )
             : null);
+  }
+}
+
+class EditNameTField extends StatelessWidget {
+  EditNameTField({
+    super.key,
+    required this.nameTxtCtr,
+    required this.userCtr,
+  });
+
+  final TextEditingController nameTxtCtr;
+  final UserController userCtr;
+  final formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        right: 20,
+        left: 20,
+        top: 20,
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: Form(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        key: formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Enter your name',
+              style: AppStyle.txtQuicksand,
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                errorStyle: AppStyle.txtQuicksand.copyWith(fontSize: 13),
+              ),
+              style: AppStyle.txtQuicksand,
+              controller: nameTxtCtr,
+              autofocus: true,
+              validator: (value) {
+                if (value!.isEmpty) return 'Name should not be empty';
+                return null;
+              },
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(),
+                  Row(
+                    children: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            'Cancel',
+                            style: AppStyle.txtQuicksand,
+                          )),
+                      TextButton(
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              userCtr.changeName(nameTxtCtr.text);
+                            }
+                          },
+                          child: Text(
+                            'Save',
+                            style: AppStyle.txtQuicksand,
+                          )),
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

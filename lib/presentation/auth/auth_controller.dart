@@ -3,13 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:tezda_task/app_widgets/generic_dialog.dart';
 import 'package:tezda_task/app_widgets/loading_button.dart';
 import 'package:tezda_task/core/app_routes.dart';
 import 'package:tezda_task/core/generics.dart';
 import 'package:tezda_task/core/services/storage_service.dart';
 import 'package:tezda_task/presentation/auth/screens/email_verification_sent.dart';
 import 'package:tezda_task/presentation/auth/screens/login_or_register.dart';
-import 'package:tezda_task/presentation/auth/widgets/account_inactive_dialog.dart';
 import 'package:tezda_task/utils/app_functions.dart';
 
 class AuthController extends GetxController {
@@ -81,7 +81,8 @@ class AuthController extends GetxController {
   }
 
   Future<void> checkVerification(
-      BuildContext context, String signUpMethod) async {
+    BuildContext context,
+  ) async {
     final user = firebaseAuth.currentUser;
     user!.reload();
 
@@ -91,7 +92,7 @@ class AuthController extends GetxController {
           description: 'Email verification succesful',
           elegantNotifType: NotificationType.success);
 
-      Get.to(() => LoginOrReg(
+      Get.off(() => LoginOrReg(
             isSignUp: false,
             authCtr: this,
           ));
@@ -123,9 +124,10 @@ class AuthController extends GetxController {
         if (context.mounted) {
           showEmailNotVerirfiedPop(
             context,
-            () {
+            () async {
               Navigator.of(context).pop();
-              user.sendEmailVerification();
+              await user.sendEmailVerification();
+              Get.to(() => const EmailSentVerificationScreen());
             },
           );
         }
@@ -163,7 +165,12 @@ class AuthController extends GetxController {
     showDialog(
       context: context,
       builder: (context) {
-        return AccountInactiveDialog(onClickVerify: onClickVerify);
+        return GenericDialog(
+            icon: Icons.no_accounts,
+            content: "You haven't verified this email yet!",
+            confirmText: 'Verify now',
+            cancelText: 'Maybe Later',
+            onYes: onClickVerify);
       },
     );
   }

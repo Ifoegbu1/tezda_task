@@ -20,7 +20,7 @@ showElegantNotif(
   FontWeight? descriptionFontWt,
 }) {
   // Color bgClr = Colors.white;
-  Color bgClr = AppColors.elegantNotifBgCLr();
+  Color bgClr = AppColors.elegantNotifBgClr();
   return elegantNotifType == NotificationType.error
       ? ElegantNotification.error(
           toastDuration: toastDuration,

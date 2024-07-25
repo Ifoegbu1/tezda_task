@@ -77,14 +77,17 @@ class _EmailSentVerificationScreenState
               height: 5,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                authCtr.checkVerification(context);
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     'Verified?',
-                    style: AppStyle.txtQuicksand.copyWith(),
+                    style: AppStyle.txtQuicksand
+                        .copyWith(color: AppColors.sizeTxtClr()),
                   ),
                   const SizedBox(
                     width: 5,

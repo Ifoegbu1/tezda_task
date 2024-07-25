@@ -64,7 +64,7 @@ class HomeItem extends StatelessWidget {
                 child: FittedBox(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Column(
@@ -88,11 +88,11 @@ class HomeItem extends StatelessWidget {
                           ),
                         ],
                       ),
-
-                      // const Spacer(),
-                      // const Icon(CupertinoIcons.heart)
-
-                      FavouriteButton(homeCtr: homeCtr, product: product),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child:
+                            FavouriteButton(homeCtr: homeCtr, product: product),
+                      ),
                     ],
                   ),
                 ),
