@@ -73,6 +73,7 @@ jobs:
         run: |
            flutter build apk --release --split-per-abi --obfuscate --split-debug-info=build/app/outputs/symbols &&
            echo "STARTING APP SIGN" 
+           sudo apt-get -y install apksigner
            apksigner sign --ks ${{ secrets.KEYSTORE_FILE }} --ks-key-alias ${{ secrets.KEY_ALIAS }} --ks-pass pass:${{ secrets.KEYSTORE_PASSWORD }} --key-pass pass:${{ secrets.KEY_PASSWORD }} build/app/outputs/flutter-apk/app-arm64-v8a-release.apk 
 
 
