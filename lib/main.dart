@@ -27,7 +27,7 @@ Future<void> main() async {
   ]);
   runApp(
     DevicePreview(
-      enabled: false,
+      enabled: kDebugMode,
       tools: [
         ...DevicePreview.defaultTools,
         DevicePreviewScreenshot(
@@ -66,8 +66,8 @@ class _MyAppState extends State<MyApp> {
                     getPages: AppRoutes.routes,
                     initialBinding: InitControllers(),
                     initialRoute: AppRoutes.initialR,
-                    // locale: DevicePreview.locale(context),
-                    // builder: DevicePreview.appBuilder,
+                    locale: DevicePreview.locale(context),
+                    builder: DevicePreview.appBuilder,
                     debugShowCheckedModeBanner: false,
                     title: 'Tezda',
                     theme: theme
