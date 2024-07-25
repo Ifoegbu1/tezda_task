@@ -70,6 +70,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '489204131538',
     projectId: 'tezda-ce907',
     storageBucket: 'tezda-ce907.appspot.com',
+    androidClientId: '489204131538-rv7mdb0ui41tr2idi50dnh558svamo7t.apps.googleusercontent.com',
+    iosClientId: '489204131538-u385ifh2bkns7aho31pfnc28ik70u8g9.apps.googleusercontent.com',
     iosBundleId: 'com.tezda.tezdaTask',
   );
+
 }

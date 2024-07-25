@@ -12,7 +12,20 @@
           "package_name": "com.tezda.tezda_task"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "489204131538-rv7mdb0ui41tr2idi50dnh558svamo7t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tezda.tezda_task",
+            "certificate_hash": "2c07b9f3aec2c78a99f690e916a7b22b2d7697de"
+          }
+        },
+        {
+          "client_id": "489204131538-4cvd9sg0ejigme5nrd458tscl6bs4eue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAODKR1_MzVhk3OJ8edRe0c0b9HiRfyJfg"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "489204131538-4cvd9sg0ejigme5nrd458tscl6bs4eue.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "489204131538-u385ifh2bkns7aho31pfnc28ik70u8g9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tezda.tezdaTask"
+              }
+            }
+          ]
         }
       }
     }
