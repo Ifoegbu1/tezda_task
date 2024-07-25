@@ -51,7 +51,7 @@ class AuthScreen extends StatelessWidget {
                 ),
                 const Gap(20),
                 Text(
-                  'Get your dream item easily with Tazda \nand get other intersting offers',
+                  'Get your dream item easily with Tezda \nand get other intersting offers',
                   style: AppStyle.txtQuicksand.copyWith(
                       fontWeight: FontWeight.w700, color: Colors.grey),
                 ),
