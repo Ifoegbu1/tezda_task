@@ -28,11 +28,9 @@ class LogoutDialog extends StatelessWidget {
           size: 30,
         ),
       ),
-      content: const Text(
-        'Are you sure you want to log out?',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      actionsAlignment: MainAxisAlignment.spaceBetween,
+      content: Text('Are you sure you want to log out?',
+          style: AppStyle.txtQuicksand),
+      actionsAlignment: MainAxisAlignment.spaceAround,
       actions: [
         CustomElevatedButton(
           backgroundColor: const Color.fromRGBO(248, 251, 255, 1),
