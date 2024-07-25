@@ -1,0 +1,75 @@
+{
+    "dart.flutterSdkPath": "/home/ifoegbu1/fvm/versions/3.19.4",
+    // Remove .fvm files from searchad
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.organizeImports": "explicit"
+    },
+    "editor.rulers": [
+        80
+    ],
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "matchingDocuments",
+    // "editor.selectionHighlight": false,
+    "editor.formatOnPaste": true,
+    // "editor.suggest.snippetsPreventQuickSuggestions": false,
+    // "editor.suggestSelection": "first",
+    // "editor.tabCompletion": "onlySnippets",
+    // "editor.wordBasedSuggestions": true,
+    // "editor.snippetSuggestions": "bottom",
+    // "editor.snippets.codeActions.enabled": true,
+    // "editor.suggest.showSnippets": true
+    "emulator.emulatorPathLinux": "/home/ifoegbu1/Android/Sdk/emulator",
+    "workbench.colorCustomizations": {},
+    "debug.allowBreakpointsEverywhere": true,
+    "editor.quickSuggestions": {
+        "comments": "on",
+        "strings": "on",
+        "other": "on"
+    },
+    "workbench.colorTheme": "Community Material Theme Ocean",
+    // Remove .fvm files from search
+    "search.exclude": {
+        "**/.fvm": true
+    },
+    // Remove from file watching
+    "files.watcherExclude": {
+        "**/.fvm": true
+    },
+    "workbench.iconTheme": "material-icon-theme",
+    "window.zoomLevel": -1,
+    "php.suggest.basic": false,
+    "php.validate.enable": false,
+    "emmet.excludeLanguages": [
+        "markdown",
+        "php"
+    ],
+    "dart.debugExternalPackageLibraries": false,
+    "dart.debugSdkLibraries": false,
+    "[javascript]": {},
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/fluttercandies/flutter_asset_generator/master/fgen_schema.json": [
+            "fgen.yaml"
+        ]
+    },
+    "files.autoSave": "afterDelay",
+    "editor.fontLigatures": false,
+    // "editor.fontFamily": "'Quicksand', 'Quicksand', Quicksand",
+    "editor.fontSize": 15,
+    "editor.fontWeight": "bold",
+    "debug.console.fontFamily": "",
+    // "terminal.integrated.fontFamily": "monospace",
+    // "terminal.integrated.fontSize": 12,
+    "errorLens.fontWeight": "bold",
+    // "vscode_custom_css.imports": [
+    //     "file:///home/ifoegbu1/vscode-custom.css"
+    // ]
+}

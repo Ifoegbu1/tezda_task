@@ -1,0 +1,82 @@
+name: iOS-Android-build
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-ios:
+    name: "iOS Build"
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: "3.19.4"
+          architecture: x64
+
+      - name: Get Flutter dependencies
+        run: flutter pub get
+
+      - name: Update CocoaPods repo
+        run: pod repo update
+        working-directory: ios
+
+      - name: Build iOS app
+        run: flutter build ios --release --no-codesign
+
+      - name: Create Payload directory
+        run: mkdir Payload
+        working-directory: build/ios/iphoneos
+
+      - name: Move app to Payload directory
+        run: mv Runner.app/ Payload
+        working-directory: build/ios/iphoneos
+
+      - name: Zip output
+        run: zip -qq -r -9 FlutterIpaExport.ipa Payload
+        working-directory: build/ios/iphoneos
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/ios/iphoneos/FlutterIpaExport.ipa
+          tag: v1.0
+          overwrite: true
+          body: "This is first release"
+
+  build-android:
+    name: "Android Build"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: "3.19.4"
+          architecture: x64
+
+      - name: Get Flutter dependencies
+        run: flutter pub get
+
+      - name: Build Android app
+        run: flutter build apk --release --split-per-abi --obfuscate --split-debug-info=build/app/outputs/symbols
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+          tag: v1.0
+          overwrite: true
+          body: "This is first  the release"
