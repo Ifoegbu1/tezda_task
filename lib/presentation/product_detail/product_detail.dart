@@ -129,6 +129,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   'Select Color',
                   style: AppStyle.txtQuicksand,
                 ),
+                const Gap(5),
                 Row(
                   children: List.generate(
                       colors.length,

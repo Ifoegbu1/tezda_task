@@ -1,5 +1,5 @@
 {
-    "dart.flutterSdkPath": "/home/ifoegbu1/fvm/versions/3.19.4",
+    "dart.flutterSdkPath": ".fvm/flutter_sdk",
     // Remove .fvm files from searchad
     "editor.formatOnSave": true,
     "editor.formatOnType": true,

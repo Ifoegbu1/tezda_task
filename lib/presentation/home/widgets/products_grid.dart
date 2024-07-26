@@ -3,7 +3,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:tezda_task/presentation/home/controller/home_ctr.dart';
 import 'package:tezda_task/presentation/home/model/product_model.dart';
-import 'package:tezda_task/presentation/home/widgets/home_item.dart';
+import 'package:tezda_task/presentation/home/widgets/product_item.dart';
 import 'package:tezda_task/theme/app_style.dart';
 
 class ProductsGrid extends StatelessWidget {
@@ -29,7 +29,7 @@ class ProductsGrid extends StatelessWidget {
                 mainAxisSpacing: 20,
                 itemBuilder: (context, index) {
                   ProductModel product = homeCtr.getProductsList(isFav)[index];
-                  return HomeItem(
+                  return ProductItem(
                     product: product,
                     homeCtr: homeCtr,
                   );

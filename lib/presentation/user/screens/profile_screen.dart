@@ -36,57 +36,62 @@ class ProfileScreen extends StatelessWidget {
             style: AppStyle.txtQuicksand,
           ),
         ),
-        body: Column(
-          children: [
-            const Divider(
-              thickness: 1,
-              color: Colors.grey,
-            ),
-            UserImageContainer(
-              userCtr: userCtr,
-              isFromAcc: isFromAcc,
-            ),
-            const Gap(40),
-            profileTiles(
-              onTap: () {
-                showModalBottomSheet(
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(5),
-                          topRight: Radius.circular(5))),
-                  isScrollControlled: true,
-                  context: context,
-                  builder: (context) {
-                    return EditNameTField(
-                        nameTxtCtr: nameTxtCtr, userCtr: userCtr);
-                  },
-                );
-              },
-              title: 'Full Name',
-              isThreeLine: true,
-              subTiitle: userCtr.user.displayName!,
-              leading: CustomImageView(
-                svgPath: AppAssets.ASSETS_ICONS_USER_SVG,
-                color: AppColors.tabTextClr(),
-                height: 30,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const Divider(
+                thickness: 1,
+                color: Colors.grey,
               ),
-            ),
-            const Gap(20),
-            profileTiles(
-              leading: const Icon(Icons.email),
-              title: 'Email Address',
-              showEdit: false,
-              isThreeLine: false,
-              subTiitle: userCtr.user.email!,
-            ),
-            const Gap(20),
-            profileTiles(
-                leading: const Icon(CupertinoIcons.time),
-                title: 'Created Since',
+              UserImageContainer(
+                userCtr: userCtr,
+                isFromAcc: isFromAcc,
+              ),
+              const Gap(40),
+              profileTiles(
+                onTap: () {
+                  nameTxtCtr =
+                      TextEditingController(text: userCtr.user.displayName);
+
+                  showModalBottomSheet(
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            topRight: Radius.circular(5))),
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) {
+                      return EditNameTField(
+                          nameTxtCtr: nameTxtCtr, userCtr: userCtr);
+                    },
+                  );
+                },
+                title: 'Full Name',
+                isThreeLine: true,
+                subTiitle: userCtr.user.displayName!,
+                leading: CustomImageView(
+                  svgPath: AppAssets.ASSETS_ICONS_USER_SVG,
+                  color: AppColors.tabTextClr(),
+                  height: 30,
+                ),
+              ),
+              const Gap(20),
+              profileTiles(
+                leading: const Icon(Icons.email),
+                title: 'Email Address',
+                showEdit: false,
                 isThreeLine: false,
-                subTiitle: formatDate(userCtr.user.metadata.creationTime!),
-                showEdit: false)
-          ],
+                subTiitle: userCtr.user.email!,
+              ),
+              const Gap(20),
+              profileTiles(
+                  leading: const Icon(CupertinoIcons.time),
+                  title: 'Created Since',
+                  isThreeLine: false,
+                  subTiitle: formatDate(userCtr.user.metadata.creationTime!),
+                  showEdit: false)
+            ],
+          ),
         ),
       );
     });
@@ -146,8 +151,8 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-class EditNameTField extends StatelessWidget {
-  EditNameTField({
+class EditNameTField extends StatefulWidget {
+  const EditNameTField({
     super.key,
     required this.nameTxtCtr,
     required this.userCtr,
@@ -155,6 +160,12 @@ class EditNameTField extends StatelessWidget {
 
   final TextEditingController nameTxtCtr;
   final UserController userCtr;
+
+  @override
+  State<EditNameTField> createState() => _EditNameTFieldState();
+}
+
+class _EditNameTFieldState extends State<EditNameTField> {
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -169,60 +180,67 @@ class EditNameTField extends StatelessWidget {
       child: Form(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         key: formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Enter your name',
-              style: AppStyle.txtQuicksand,
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                errorStyle: AppStyle.txtQuicksand.copyWith(fontSize: 13),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Enter your name',
+                style: AppStyle.txtQuicksand,
               ),
-              style: AppStyle.txtQuicksand,
-              controller: nameTxtCtr,
-              autofocus: true,
-              validator: (value) {
-                if (value!.isEmpty) return 'Name should not be empty';
-                return null;
-              },
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(),
-                  Row(
-                    children: [
-                      TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text(
-                            'Cancel',
-                            style: AppStyle.txtQuicksand,
-                          )),
-                      TextButton(
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              userCtr.changeName(nameTxtCtr.text);
-                            }
-                          },
-                          child: Text(
-                            'Save',
-                            style: AppStyle.txtQuicksand,
-                          )),
-                    ],
-                  )
-                ],
+              TextFormField(
+                onFieldSubmitted: (value) => changeName(),
+                decoration: InputDecoration(
+                  errorStyle: AppStyle.txtQuicksand.copyWith(fontSize: 13),
+                ),
+                style: AppStyle.txtQuicksand,
+                controller: widget.nameTxtCtr,
+                autofocus: true,
+                validator: (value) {
+                  if (value!.isEmpty) return 'Name should not be empty';
+                  return null;
+                },
               ),
-            )
-          ],
+              Align(
+                alignment: Alignment.centerRight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox(),
+                    Row(
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text(
+                              'Cancel',
+                              style: AppStyle.txtQuicksand,
+                            )),
+                        TextButton(
+                            onPressed: () {
+                              changeName();
+                            },
+                            child: Text(
+                              'Save',
+                              style: AppStyle.txtQuicksand,
+                            )),
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  void changeName() {
+    if (formKey.currentState!.validate()) {
+      widget.userCtr.changeName(widget.nameTxtCtr.text);
+    }
   }
 }

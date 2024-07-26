@@ -11,8 +11,8 @@ import 'package:tezda_task/theme/app_style.dart';
 import 'package:tezda_task/utils/app_colors.dart';
 import 'package:tezda_task/utils/app_functions.dart';
 
-class HomeItem extends StatelessWidget {
-  const HomeItem({
+class ProductItem extends StatelessWidget {
+  const ProductItem({
     super.key,
     required this.product,
     required this.homeCtr,
@@ -73,7 +73,7 @@ class HomeItem extends StatelessWidget {
                           SizedBox(
                             width: 110.0.dynW,
                             child: Marquee(
-                              animationDuration: 10.seconds,
+                              animationDuration: 20.seconds,
                               child: Text(
                                 product.title,
                                 style: AppStyle.txtQuicksand,

@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "489204131538-h8ri5ojds20vmovs00cqpji2rntklaqo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tezda.tezda_task",
+            "certificate_hash": "dd686c4e4d9c7564501f55a614c10fe07e2466f2"
+          }
+        },
+        {
           "client_id": "489204131538-rv7mdb0ui41tr2idi50dnh558svamo7t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -120,8 +120,8 @@ class _HomeState extends State<Home> {
                                   fontSize: 14, fontWeight: FontWeight.w600),
                               labelColor: Colors.white,
                               indicator: ContainerTabIndicator(
-                                height: 30,
-                                width: 80,
+                                height: 22.0.dynH,
+                                width: 83.0.dynW,
                                 radius: BorderRadius.circular(71),
                                 color: AppColors.lightBlue,
                               ),

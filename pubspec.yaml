@@ -32,8 +32,9 @@ dependencies:
   cached_network_image: ^3.3.1
   contained_tab_bar_view: ^0.8.0
   cupertino_icons: ^1.0.6
-  device_preview: 1.1.0
+  device_preview: 1.2.0
   device_preview_screenshot: ^1.0.0
+  double_back_to_close: ^2.0.0
   elegant_notification: ^2.2.2
   firebase_auth: ^5.1.2
   firebase_core: ^3.2.0
@@ -50,7 +51,7 @@ dependencies:
   google_sign_in: ^6.2.1
   http: ^1.2.2
   image_picker: ^1.1.2
-  intl: ^0.18.0
+  intl: null
   like_button: ^2.0.5
   loading_indicator: ^3.1.1
   marquee_widget: ^1.2.0
