@@ -98,7 +98,7 @@ class _ProductDetailState extends State<ProductDetail> {
                     Text(
                       '\$${widget.product.price}',
                       style: AppStyle.txtQuicksand.copyWith(
-                          fontSize: 24.0.dynFont, color: AppColors.lightBlue),
+                          fontSize: 24.0.dynFont, color: AppColors.lightBlue,),
                     ),
                   ],
                 ),
@@ -137,7 +137,7 @@ class _ProductDetailState extends State<ProductDetail> {
                             setState(() {
                               selectedClrIndex = index;
                             });
-                          }, index)),
+                          }, index,),),
                 ),
                 const Gap(10),
                 Text(
@@ -151,19 +151,19 @@ class _ProductDetailState extends State<ProductDetail> {
                             setState(() {
                               selectedSizeIndex = index;
                             });
-                          }, index)),
+                          }, index,),),
                 ),
 
                 Gap(
                   MediaQuery.of(context).size.height * 0.1,
-                )
+                ),
               ],
             ),
           ),
         ),
         floatingActionButtonLocation:
             FloatingActionButtonLocation.miniCenterDocked,
-        floatingActionButton: CustomFloatingBtn(widget: widget));
+        floatingActionButton: CustomFloatingBtn(widget: widget),);
   }
 
   Widget productClrs(Color color, Function() onTap, int index) {
@@ -180,8 +180,8 @@ class _ProductDetailState extends State<ProductDetail> {
                     Icons.check,
                     color: Colors.black,
                     size: 15,
-                  ))
-                : null),
+                  ),)
+                : null,),
       ),
     );
   }
@@ -206,7 +206,7 @@ class _ProductDetailState extends State<ProductDetail> {
             style:
                 AppStyle.txtQuicksand.copyWith(color: AppColors.sizeTxtClr()),
           ),
-        ));
+        ),);
     // GestureDetector(
     //   onTap: onTap,
     //   child: Container(
@@ -268,7 +268,7 @@ class CustomFloatingBtn extends StatelessWidget {
             onPressed: () {},
             child: FittedBox(
               child: FavouriteButton(
-                  homeCtr: widget.homeCtr, product: widget.product),
+                  homeCtr: widget.homeCtr, product: widget.product,),
             ),
           ),
           const Gap(2),

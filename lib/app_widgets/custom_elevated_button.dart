@@ -62,32 +62,32 @@ class CustomElevatedButton extends StatelessWidget {
           // ),
           ElevatedButton(
         style: ButtonStyle(
-          elevation: MaterialStatePropertyAll(elevation),
-          foregroundColor: MaterialStatePropertyAll(foregroundColor),
+          elevation: WidgetStatePropertyAll(elevation),
+          foregroundColor: WidgetStatePropertyAll(foregroundColor),
           alignment: alignment,
-          surfaceTintColor: MaterialStatePropertyAll(
+          surfaceTintColor: WidgetStatePropertyAll(
             backgroundColor ?? defaultBgClr,
           ),
           // disabledBackgroundColor: backgroundColor,
           enableFeedback: true,
-          backgroundColor: MaterialStatePropertyAll(
+          backgroundColor: WidgetStatePropertyAll(
             backgroundColor ?? defaultBgClr,
           ),
-          shape: MaterialStatePropertyAll(shape),
+          shape: WidgetStatePropertyAll(shape),
           visualDensity: visualDensity,
 
-          minimumSize: MaterialStatePropertyAll(minimumSize),
-          fixedSize: MaterialStatePropertyAll(fixedSize),
-          maximumSize: MaterialStatePropertyAll(maximumSize),
-          padding: MaterialStatePropertyAll(padding),
-          overlayColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) {
+          minimumSize: WidgetStatePropertyAll(minimumSize),
+          fixedSize: WidgetStatePropertyAll(fixedSize),
+          maximumSize: WidgetStatePropertyAll(maximumSize),
+          padding: WidgetStatePropertyAll(padding),
+          overlayColor: WidgetStateProperty.resolveWith<Color?>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.pressed)) {
                 if (pressedColor != null) {
                   return pressedColor!
                       .withOpacity(0.2); // Highlight color when pressed
                 }
-                if (states.contains(MaterialState.disabled)) {
+                if (states.contains(WidgetState.disabled)) {
                   return backgroundColor ?? defaultBgClr;
                 }
               }

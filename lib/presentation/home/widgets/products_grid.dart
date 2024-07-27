@@ -18,31 +18,32 @@ class ProductsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(top: 0, left: 15, right: 15),
-        child: homeCtr.getProductsList(isFav).isNotEmpty
-            ? StaggeredGridView.countBuilder(
-                itemCount: homeCtr.getProductsList(isFav).length,
-                shrinkWrap: true,
-                primary: false,
-                crossAxisCount: 4,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-                itemBuilder: (context, index) {
-                  ProductModel product = homeCtr.getProductsList(isFav)[index];
-                  return ProductItem(
-                    product: product,
-                    homeCtr: homeCtr,
-                  );
-                },
-                staggeredTileBuilder: (index) {
-                  return const StaggeredTile.fit(2);
-                },
-              )
-            : Center(
-                child: Text(
-                  'Nothing here for now',
-                  style: AppStyle.txtQuicksand,
-                ),
-              ));
+      padding: const EdgeInsets.only(top: 0, left: 15, right: 15),
+      child: homeCtr.getProductsList(isFav).isNotEmpty
+          ? StaggeredGridView.countBuilder(
+              itemCount: homeCtr.getProductsList(isFav).length,
+              shrinkWrap: true,
+              primary: false,
+              crossAxisCount: 4,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+              itemBuilder: (context, index) {
+                ProductModel product = homeCtr.getProductsList(isFav)[index];
+                return ProductItem(
+                  product: product,
+                  homeCtr: homeCtr,
+                );
+              },
+              staggeredTileBuilder: (index) {
+                return const StaggeredTile.fit(2);
+              },
+            )
+          : Center(
+              child: Text(
+                'Nothing here for now',
+                style: AppStyle.txtQuicksand,
+              ),
+            ),
+    );
   }
 }

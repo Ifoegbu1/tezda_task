@@ -85,7 +85,7 @@ class _TextSeeMoreState extends State<TextSeeMore> {
                   maxLines == 3 ? 'show more' : 'show less',
                   style: TextStyle(
                       color: maxLines != 3 ? AppColors.lightBlue : Colors.teal,
-                      fontSize: 12),
+                      fontSize: 12,),
                 ),
               ),
             ],

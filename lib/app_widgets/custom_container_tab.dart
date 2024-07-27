@@ -163,7 +163,7 @@ class CustomContainedTabBarViewState extends State<CustomContainedTabBarView>
         child: Padding(
           padding: widget.tabBarProperties.padding,
           child: TabBar(
-            overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+            overlayColor: const WidgetStatePropertyAll(Colors.transparent),
             controller: _controller,
             tabs: widget.tabs,
             splashBorderRadius: BorderRadius.circular(7),

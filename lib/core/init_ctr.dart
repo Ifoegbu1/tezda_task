@@ -8,8 +8,11 @@ class InitControllers extends Bindings {
   @override
   void dependencies() {
     Get.put<HomeController>(HomeController());
-    Get.put<AuthController>(AuthController(
-        firebaseAuth: FirebaseAuth.instance));
+    Get.put<AuthController>(
+      AuthController(
+        firebaseAuth: FirebaseAuth.instance,
+      ),
+    );
     Get.put<UserController>(UserController());
   }
 }

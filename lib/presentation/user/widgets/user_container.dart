@@ -51,15 +51,16 @@ class UserImageContainer extends StatelessWidget {
                         height: 120.0.dynH,
                         width: user.photoURL != null ? 140.0.dynW : 50,
                         radius: BorderRadius.circular(40),
-                        onTap: () {
-                          Get.to(
-                            () => CustomPhotoView(
-                              photoUrl: user.photoURL!,
-                              heroTag: isFromAcc ? 'acct-pic' : 'profile-pic',
-                            ),
-                            transition: Transition.noTransition,
-                          );
-                        },
+                        onTap: user.photoURL == null
+                            ? null
+                            : () => Get.to(
+                                  () => CustomPhotoView(
+                                    photoUrl: user.photoURL!,
+                                    heroTag:
+                                        isFromAcc ? 'acct-pic' : 'profile-pic',
+                                  ),
+                                  transition: Transition.noTransition,
+                                ),
                       ),
               ),
             ),

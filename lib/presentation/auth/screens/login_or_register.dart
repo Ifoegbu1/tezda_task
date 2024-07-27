@@ -173,14 +173,15 @@ class _LoginOrRegState extends State<LoginOrReg> {
                   ),
                   if (!widget.isSignUp)
                     Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Forgot Password',
-                            style: AppStyle.txtQuicksand,
-                          ),
-                        )),
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Forgot Password',
+                          style: AppStyle.txtQuicksand,
+                        ),
+                      ),
+                    ),
                   if (widget.isSignUp) const Gap(10),
                   ConfirmLoadingButton(
                     borderRadius: 20,
@@ -201,34 +202,37 @@ class _LoginOrRegState extends State<LoginOrReg> {
                   // const Spacer(),
                   Center(
                     child: RichText(
-                        text: TextSpan(
-                            style: AppStyle.txtQuicksand
-                                .copyWith(color: Colors.grey),
-                            children: [
+                      text: TextSpan(
+                        style:
+                            AppStyle.txtQuicksand.copyWith(color: Colors.grey),
+                        children: [
                           TextSpan(
                             text: widget.isSignUp
                                 ? 'Have an account already? '
                                 : "Don't have an account? ",
                           ),
                           TextSpan(
-                              text: widget.isSignUp ? 'Sign in' : 'Create',
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  if (widget.isSignUp) {
-                                    setState(() {
-                                      widget.isSignUp = false;
-                                    });
-                                  } else {
-                                    setState(() {
-                                      widget.isSignUp = true;
-                                    });
-                                  }
-                                  formKey.currentState!.reset();
-                                },
-                              style: AppStyle.txtQuicksand
-                                  .copyWith(color: AppColors.lightBlue))
-                        ])),
-                  )
+                            text: widget.isSignUp ? 'Sign in' : 'Create',
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                if (widget.isSignUp) {
+                                  setState(() {
+                                    widget.isSignUp = false;
+                                  });
+                                } else {
+                                  setState(() {
+                                    widget.isSignUp = true;
+                                  });
+                                }
+                                formKey.currentState!.reset();
+                              },
+                            style: AppStyle.txtQuicksand
+                                .copyWith(color: AppColors.lightBlue),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

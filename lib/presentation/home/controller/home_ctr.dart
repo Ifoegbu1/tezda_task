@@ -92,7 +92,8 @@ class HomeController extends GetxController {
     filteredProducts = products;
     filteredProducts = products
         .where(
-            (element) => element.category == productCategories[selectedHomeTab])
+          (element) => element.category == productCategories[selectedHomeTab],
+        )
         .toList();
     update();
   }

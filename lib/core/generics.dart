@@ -227,7 +227,7 @@ ToastFuture showAnimToast(BuildContext context, String msg) {
     ),
     // textStyle: AppStyle.txtQuicksand.copyWith(color: Colors.white),
     context: context,
-    backgroundColor: Theme.of(context).colorScheme.background,
+    backgroundColor: Theme.of(context).colorScheme.surface,
     animation: StyledToastAnimation.sizeFade,
   );
 }

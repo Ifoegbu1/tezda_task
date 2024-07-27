@@ -76,16 +76,16 @@ class AccountPage extends StatelessWidget {
                                               ? 140.0.dynW
                                               : 50,
                                           radius: BorderRadius.circular(40),
-                                          onTap: () {
-                                            Get.to(
-                                              () => CustomPhotoView(
-                                                photoUrl: user.photoURL!,
-                                                heroTag: 'acct-pic',
-                                              ),
-                                              transition:
-                                                  Transition.noTransition,
-                                            );
-                                          },
+                                          onTap: user.photoURL == null
+                                              ? null
+                                              : () => Get.to(
+                                                    () => CustomPhotoView(
+                                                      photoUrl: user.photoURL!,
+                                                      heroTag: 'acct-pic',
+                                                    ),
+                                                    transition:
+                                                        Transition.noTransition,
+                                                  ),
                                         ),
                                       ),
                                     ),
@@ -146,11 +146,12 @@ class AccountPage extends StatelessWidget {
                         AccountItem(
                           onTap: () {
                             Get.to(
-                                () => ProfileScreen(
-                                      userCtr: userCtr,
-                                      isFromAcc: true,
-                                    ),
-                                transition: Transition.rightToLeft);
+                              () => ProfileScreen(
+                                userCtr: userCtr,
+                                isFromAcc: true,
+                              ),
+                              transition: Transition.rightToLeft,
+                            );
                           },
                           title: 'My Profile',
                           icon: CupertinoIcons.person_crop_circle_fill,
@@ -187,8 +188,10 @@ class AccountPage extends StatelessWidget {
                           title: 'Check For updates',
                           icon: Icons.update_rounded,
                           onTap: () {
-                            showAnimToast(context,
-                                'Great you are on the latest version!');
+                            showAnimToast(
+                              context,
+                              'Great you are on the latest version!',
+                            );
                           },
                         ),
                         Padding(
@@ -207,13 +210,15 @@ class AccountPage extends StatelessWidget {
                           title: 'Log Out',
                           icon: Icons.logout,
                           onTap: () {
-                            Get.dialog(GenericDialog(
-                              icon: Icons.logout,
-                              content: 'Are you sure you want to log out?',
-                              confirmText: 'Yes',
-                              cancelText: 'No',
-                              onYes: () => authCtr.logout(),
-                            ));
+                            Get.dialog(
+                              GenericDialog(
+                                icon: Icons.logout,
+                                content: 'Are you sure you want to log out?',
+                                confirmText: 'Yes',
+                                cancelText: 'No',
+                                onYes: () => authCtr.logout(),
+                              ),
+                            );
                           },
                         ),
                       ],

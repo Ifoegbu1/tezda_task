@@ -43,16 +43,21 @@ class AuthController extends GetxController {
   ) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailTxtCtr.text, password: passwordCtr.text);
+        email: emailTxtCtr.text,
+        password: passwordCtr.text,
+      );
 
       User? user = FirebaseAuth.instance.currentUser;
       if (user != null && !user.emailVerified) {
         await user.updateDisplayName(nameTxtCtr.text);
         await user.sendEmailVerification().then((value) async {
           delayedFunc(
-              () => Get.to(() => const EmailSentVerificationScreen(),
-                  transition: Transition.noTransition),
-              2.seconds);
+            () => Get.to(
+              () => const EmailSentVerificationScreen(),
+              transition: Transition.noTransition,
+            ),
+            2.seconds,
+          );
         });
 
         buttonStatus(
@@ -87,15 +92,19 @@ class AuthController extends GetxController {
     user!.reload();
 
     if (user.emailVerified) {
-      showElegantNotif(context,
-          title: 'Verification',
-          description: 'Email verification succesful',
-          elegantNotifType: NotificationType.success);
+      showElegantNotif(
+        context,
+        title: 'Verification',
+        description: 'Email verification succesful',
+        elegantNotifType: NotificationType.success,
+      );
 
-      Get.off(() => LoginOrReg(
-            isSignUp: false,
-            authCtr: this,
-          ));
+      Get.off(
+        () => LoginOrReg(
+          isSignUp: false,
+          authCtr: this,
+        ),
+      );
     } else {
       showElegantNotif(
         context,
@@ -112,7 +121,9 @@ class AuthController extends GetxController {
     try {
       await firebaseAuth.signOut();
       await firebaseAuth.signInWithEmailAndPassword(
-          email: emailTxtCtr.text, password: passwordCtr.text);
+        email: emailTxtCtr.text,
+        password: passwordCtr.text,
+      );
 
       User? user = FirebaseAuth.instance.currentUser;
 
@@ -161,16 +172,19 @@ class AuthController extends GetxController {
   }
 
   void showEmailNotVerirfiedPop(
-      BuildContext context, Function() onClickVerify) {
+    BuildContext context,
+    Function() onClickVerify,
+  ) {
     showDialog(
       context: context,
       builder: (context) {
         return GenericDialog(
-            icon: Icons.no_accounts,
-            content: "You haven't verified this email yet!",
-            confirmText: 'Verify now',
-            cancelText: 'Maybe Later',
-            onYes: onClickVerify);
+          icon: Icons.no_accounts,
+          content: "You haven't verified this email yet!",
+          confirmText: 'Verify now',
+          cancelText: 'Maybe Later',
+          onYes: onClickVerify,
+        );
       },
     );
   }
@@ -210,13 +224,16 @@ class AuthController extends GetxController {
         }
       } on FirebaseAuthException catch (e) {
         buttonStatus(
-            buttonStatusType: ButtonState.error,
-            buttonController: googleBtnCtr);
+          buttonStatusType: ButtonState.error,
+          buttonController: googleBtnCtr,
+        );
         if (context.mounted) firebaseErrorCode(context, e.code);
       }
     } catch (e) {
       buttonStatus(
-          buttonStatusType: ButtonState.error, buttonController: googleBtnCtr);
+        buttonStatusType: ButtonState.error,
+        buttonController: googleBtnCtr,
+      );
       tezdaLog(e);
     }
   }

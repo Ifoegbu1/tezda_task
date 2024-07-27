@@ -82,7 +82,7 @@ class _HomeState extends State<Home> {
                       fontSize: 30,
                       decorationColor: AppColors.lightBlue,
                       decorationStyle: TextDecorationStyle.solid,
-                      decoration: TextDecoration.underline),
+                      decoration: TextDecoration.underline,),
                 ),
               ],
             ),
@@ -100,7 +100,7 @@ class _HomeState extends State<Home> {
                       return Theme(
                         data: Theme.of(context).copyWith(
                           tabBarTheme: const TabBarTheme(
-                              dividerColor: Colors.transparent),
+                              dividerColor: Colors.transparent,),
                         ),
                         child: CustomContainedTabBarView(
                           callOnChangeWhileIndexIsChanging: true,
@@ -109,7 +109,7 @@ class _HomeState extends State<Home> {
                               : homeCtr.selectedHomeTab,
                           key: tabKey,
                           tabBarViewProperties: const TabBarViewProperties(
-                              physics: NeverScrollableScrollPhysics()),
+                              physics: NeverScrollableScrollPhysics(),),
                           tabBarProperties: TabBarProperties(
                               position: TabBarPosition.top,
                               indicatorSize: TabBarIndicatorSize.label,
@@ -117,7 +117,7 @@ class _HomeState extends State<Home> {
                                   const EdgeInsets.symmetric(horizontal: 10),
                               margin: const EdgeInsets.all(10),
                               labelStyle: AppStyle.txtQuicksand.copyWith(
-                                  fontSize: 14, fontWeight: FontWeight.w600),
+                                  fontSize: 14, fontWeight: FontWeight.w600,),
                               labelColor: Colors.white,
                               indicator: ContainerTabIndicator(
                                 height: 22.0.dynH,
@@ -125,16 +125,16 @@ class _HomeState extends State<Home> {
                                 radius: BorderRadius.circular(71),
                                 color: AppColors.lightBlue,
                               ),
-                              unselectedLabelColor: AppColors.tabTextClr()),
+                              unselectedLabelColor: AppColors.tabTextClr(),),
                           tabs: List.generate(
                               homeCtr.getCategories(widget.isFav).length,
                               (index) => Text(getFirstWord(
-                                  homeCtr.getCategories(widget.isFav)[index]))),
+                                  homeCtr.getCategories(widget.isFav)[index],),),),
                           views: List.generate(
                               homeCtr.getCategories(widget.isFav).length,
                               (index) => ProductsGrid(
                                     isFav: widget.isFav,
-                                  )),
+                                  ),),
                           onChange: (index) {
                             tezdaLog('ONCHANGE ${homeCtr.favCategories}');
                             tezdaLog('ONCHANGE${homeCtr.selectedFavTab}');
@@ -148,7 +148,7 @@ class _HomeState extends State<Home> {
                           },
                         ),
                       );
-                    })
+                    },)
                   : Center(
                       child: Text(
                         widget.isFav
@@ -173,7 +173,7 @@ class _HomeState extends State<Home> {
                       pathBackgroundColor: Colors.transparent,
                     ),
                   ),
-                ));
-    });
+                ),);
+    },);
   }
 }

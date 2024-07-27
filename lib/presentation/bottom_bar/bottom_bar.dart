@@ -120,7 +120,7 @@ class _FluidBottomBarState extends State with SingleTickerProviderStateMixin {
 
                 //          // iconUnselectedForegroundColor: Colors.white,
                 // iconSelectedForegroundColor: AppColors.lightBlue,
-                barBackgroundColor: AppColors.bottomBarBgClr()),
+                barBackgroundColor: AppColors.bottomBarBgClr(),),
             scaleFactor: 1,
             defaultIndex: 0,
             itemBuilder: (icon, item) => Semantics(
@@ -129,7 +129,7 @@ class _FluidBottomBarState extends State with SingleTickerProviderStateMixin {
             ),
           ),
         );
-      }),
+      },),
     );
   }
 
@@ -163,7 +163,7 @@ class _FluidBottomBarState extends State with SingleTickerProviderStateMixin {
                 Text(
                   'Your cart is Empty',
                   style: AppStyle.txtQuicksand.copyWith(color: Colors.grey),
-                )
+                ),
               ],
             ),
           );

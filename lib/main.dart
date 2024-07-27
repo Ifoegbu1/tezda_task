@@ -31,7 +31,8 @@ Future<void> main() async {
       tools: [
         ...DevicePreview.defaultTools,
         DevicePreviewScreenshot(
-          onScreenshot: screenshotAsFiles(Directory('/storage/emulated/0/Pictures')),
+          onScreenshot:
+              screenshotAsFiles(Directory('/storage/emulated/0/Pictures')),
         ),
       ],
       builder: (context) => MyApp(
@@ -54,32 +55,34 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(360, 640),
-        minTextAdapt: true,
-        useInheritedMediaQuery: true,
-        builder: (context, chilld) {
-          return ThemeProvider(
-              initTheme: widget.theme,
-              duration: 1.seconds,
-              builder: (_, theme) {
-                return GetMaterialApp(
-                    getPages: AppRoutes.routes,
-                    initialBinding: InitControllers(),
-                    initialRoute: AppRoutes.initialR,
-                    locale: DevicePreview.locale(context),
-                    builder: DevicePreview.appBuilder,
-                    debugShowCheckedModeBanner: false,
-                    title: 'Tezda',
-                    theme: theme
-                    // theme: ThemeData(
-                    //     colorScheme: ColorScheme.fromSeed(
-                    //       seedColor: Colors.deepPurple,
-                    //       // brightness: Brightness.dark,
-                    //     ),
-                    //     useMaterial3: true,
-                    //   ),
-                    );
-              });
-        });
+      designSize: const Size(360, 640),
+      minTextAdapt: true,
+      useInheritedMediaQuery: true,
+      builder: (context, chilld) {
+        return ThemeProvider(
+          initTheme: widget.theme,
+          duration: 1.seconds,
+          builder: (_, theme) {
+            return GetMaterialApp(
+              getPages: AppRoutes.routes,
+              initialBinding: InitControllers(),
+              initialRoute: AppRoutes.initialR,
+              locale: DevicePreview.locale(context),
+              builder: DevicePreview.appBuilder,
+              debugShowCheckedModeBanner: false,
+              title: 'Tezda',
+              theme: theme,
+              // theme: ThemeData(
+              //     colorScheme: ColorScheme.fromSeed(
+              //       seedColor: Colors.deepPurple,
+              //       // brightness: Brightness.dark,
+              //     ),
+              //     useMaterial3: true,
+              //   ),
+            );
+          },
+        );
+      },
+    );
   }
 }

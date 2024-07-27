@@ -23,78 +23,87 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<UserController>(initState: (state) {
-      nameTxtCtr = TextEditingController(text: userCtr.user.displayName);
-    }, dispose: (state) {
-      nameTxtCtr.dispose();
-    }, builder: (_) {
-      return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: true,
-          title: Text(
-            'Profile',
-            style: AppStyle.txtQuicksand,
+    return GetBuilder<UserController>(
+      initState: (state) {
+        nameTxtCtr = TextEditingController(text: userCtr.user.displayName);
+      },
+      dispose: (state) {
+        nameTxtCtr.dispose();
+      },
+      builder: (_) {
+        return Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: true,
+            title: Text(
+              'Profile',
+              style: AppStyle.txtQuicksand,
+            ),
           ),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const Divider(
-                thickness: 1,
-                color: Colors.grey,
-              ),
-              UserImageContainer(
-                userCtr: userCtr,
-                isFromAcc: isFromAcc,
-              ),
-              const Gap(40),
-              profileTiles(
-                onTap: () {
-                  nameTxtCtr =
-                      TextEditingController(text: userCtr.user.displayName);
-
-                  showModalBottomSheet(
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(5),
-                            topRight: Radius.circular(5))),
-                    isScrollControlled: true,
-                    context: context,
-                    builder: (context) {
-                      return EditNameTField(
-                          nameTxtCtr: nameTxtCtr, userCtr: userCtr);
-                    },
-                  );
-                },
-                title: 'Full Name',
-                isThreeLine: true,
-                subTiitle: userCtr.user.displayName!,
-                leading: CustomImageView(
-                  svgPath: AppAssets.ASSETS_ICONS_USER_SVG,
-                  color: AppColors.tabTextClr(),
-                  height: 30,
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                const Divider(
+                  thickness: 1,
+                  color: Colors.grey,
                 ),
-              ),
-              const Gap(20),
-              profileTiles(
-                leading: const Icon(Icons.email),
-                title: 'Email Address',
-                showEdit: false,
-                isThreeLine: false,
-                subTiitle: userCtr.user.email!,
-              ),
-              const Gap(20),
-              profileTiles(
+                UserImageContainer(
+                  userCtr: userCtr,
+                  isFromAcc: isFromAcc,
+                ),
+                const Gap(40),
+                profileTiles(
+                  onTap: () {
+                    nameTxtCtr =
+                        TextEditingController(text: userCtr.user.displayName);
+
+                    showModalBottomSheet(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(5),
+                          topRight: Radius.circular(5),
+                        ),
+                      ),
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (context) {
+                        return EditNameTField(
+                          nameTxtCtr: nameTxtCtr,
+                          userCtr: userCtr,
+                        );
+                      },
+                    );
+                  },
+                  title: 'Full Name',
+                  isThreeLine: true,
+                  subTiitle: userCtr.user.displayName!,
+                  leading: CustomImageView(
+                    svgPath: AppAssets.ASSETS_ICONS_USER_SVG,
+                    color: AppColors.tabTextClr(),
+                    height: 30,
+                  ),
+                ),
+                const Gap(20),
+                profileTiles(
+                  leading: const Icon(Icons.email),
+                  title: 'Email Address',
+                  showEdit: false,
+                  isThreeLine: false,
+                  subTiitle: userCtr.user.email!,
+                ),
+                const Gap(20),
+                profileTiles(
                   leading: const Icon(CupertinoIcons.time),
                   title: 'Created Since',
                   isThreeLine: false,
                   subTiitle: formatDate(userCtr.user.metadata.creationTime!),
-                  showEdit: false)
-            ],
+                  showEdit: false,
+                ),
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
   ListTile profileTiles({
@@ -106,48 +115,48 @@ class ProfileScreen extends StatelessWidget {
     Function()? onTap,
   }) {
     return ListTile(
-        onTap: onTap,
-        isThreeLine: isThreeLine,
-        titleTextStyle: AppStyle.txtQuicksand.copyWith(
-            fontWeight: FontWeight.w300,
-            color: Colors.grey,
-            fontSize: 13.0.dynFont),
-        leading: Padding(
-          padding:
-              isThreeLine ? const EdgeInsets.only(top: 5) : EdgeInsets.zero,
-          child: leading,
-        ),
-        title: Text(title),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+      onTap: onTap,
+      isThreeLine: isThreeLine,
+      titleTextStyle: AppStyle.txtQuicksand.copyWith(
+        fontWeight: FontWeight.w300,
+        color: Colors.grey,
+        fontSize: 13.0.dynFont,
+      ),
+      leading: Padding(
+        padding: isThreeLine ? const EdgeInsets.only(top: 5) : EdgeInsets.zero,
+        child: leading,
+      ),
+      title: Text(title),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            subTiitle,
+            style: AppStyle.txtQuicksand.copyWith(fontWeight: FontWeight.w300),
+          ),
+          const Gap(7),
+          if (isThreeLine)
             Text(
-              subTiitle,
-              style:
-                  AppStyle.txtQuicksand.copyWith(fontWeight: FontWeight.w300),
+              'This name would be displayed to other users when you leave a review',
+              style: AppStyle.txtQuicksand.copyWith(
+                fontWeight: FontWeight.w300,
+                color: Colors.grey,
+                fontSize: 13.0.dynFont,
+              ),
             ),
-            const Gap(7),
-            if (isThreeLine)
-              Text(
-                'This name would be displayed to other users when you leave a review',
-                style: AppStyle.txtQuicksand.copyWith(
-                    fontWeight: FontWeight.w300,
-                    color: Colors.grey,
-                    fontSize: 13.0.dynFont),
-              )
-          ],
-        ),
-        trailing: showEdit
-            ? Padding(
-                padding: isThreeLine
-                    ? const EdgeInsets.only(top: 5)
-                    : EdgeInsets.zero,
-                child: Icon(
-                  Icons.edit_outlined,
-                  color: AppColors.lightBlue,
-                ),
-              )
-            : null);
+        ],
+      ),
+      trailing: showEdit
+          ? Padding(
+              padding:
+                  isThreeLine ? const EdgeInsets.only(top: 5) : EdgeInsets.zero,
+              child: Icon(
+                Icons.edit_outlined,
+                color: AppColors.lightBlue,
+              ),
+            )
+          : null,
+    );
   }
 }
 
@@ -211,26 +220,28 @@ class _EditNameTFieldState extends State<EditNameTField> {
                     Row(
                       children: [
                         TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text(
-                              'Cancel',
-                              style: AppStyle.txtQuicksand,
-                            )),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            'Cancel',
+                            style: AppStyle.txtQuicksand,
+                          ),
+                        ),
                         TextButton(
-                            onPressed: () {
-                              changeName();
-                            },
-                            child: Text(
-                              'Save',
-                              style: AppStyle.txtQuicksand,
-                            )),
+                          onPressed: () {
+                            changeName();
+                          },
+                          child: Text(
+                            'Save',
+                            style: AppStyle.txtQuicksand,
+                          ),
+                        ),
                       ],
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

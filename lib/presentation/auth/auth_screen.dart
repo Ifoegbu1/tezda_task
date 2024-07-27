@@ -53,7 +53,9 @@ class AuthScreen extends StatelessWidget {
                 Text(
                   'Get your dream item easily with Tezda \nand get other intersting offers',
                   style: AppStyle.txtQuicksand.copyWith(
-                      fontWeight: FontWeight.w700, color: Colors.grey),
+                    fontWeight: FontWeight.w700,
+                    color: Colors.grey,
+                  ),
                 ),
                 const Gap(30),
                 FittedBox(
@@ -61,38 +63,42 @@ class AuthScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomElevatedButton(
-                          backgroundColor: AppColors.lightGrey,
-                          fixedSize: const Size(200, 50),
-                          // padding: const EdgeInsets.all(10),
-                          onPressed: () {
-                            Get.to(
-                                () => LoginOrReg(
-                                      authCtr: authCtr,
-                                      isSignUp: true,
-                                    ),
-                                transition: Transition.fadeIn);
-                          },
-                          child: Text(
-                            'Sign Up',
-                            style: AppStyle.txtQuicksand
-                                .copyWith(color: Colors.black),
-                          )),
+                        backgroundColor: AppColors.lightGrey,
+                        fixedSize: const Size(200, 50),
+                        // padding: const EdgeInsets.all(10),
+                        onPressed: () {
+                          Get.to(
+                            () => LoginOrReg(
+                              authCtr: authCtr,
+                              isSignUp: true,
+                            ),
+                            transition: Transition.fadeIn,
+                          );
+                        },
+                        child: Text(
+                          'Sign Up',
+                          style: AppStyle.txtQuicksand
+                              .copyWith(color: Colors.black),
+                        ),
+                      ),
                       const Gap(10),
                       CustomElevatedButton(
-                          fixedSize: const Size(200, 50),
-                          onPressed: () {
-                            Get.to(
-                                () => LoginOrReg(
-                                      authCtr: authCtr,
-                                      isSignUp: false,
-                                    ),
-                                transition: Transition.fadeIn);
-                          },
-                          child: Text(
-                            'Sign In',
-                            style: AppStyle.txtQuicksand
-                                .copyWith(color: Colors.white),
-                          ))
+                        fixedSize: const Size(200, 50),
+                        onPressed: () {
+                          Get.to(
+                            () => LoginOrReg(
+                              authCtr: authCtr,
+                              isSignUp: false,
+                            ),
+                            transition: Transition.fadeIn,
+                          );
+                        },
+                        child: Text(
+                          'Sign In',
+                          style: AppStyle.txtQuicksand
+                              .copyWith(color: Colors.white),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -147,30 +153,31 @@ class AuthScreen extends StatelessWidget {
 
                 GoogleAuthButton(authCtr: authCtr),
                 CustomElevatedButton(
-                    margin: const EdgeInsets.symmetric(vertical: 20),
-                    padding: const EdgeInsets.all(5),
-                    // margin: const EdgeInsets.symmetric(vertical: 20),
-                    // alignment: Alignment.center,
-                    backgroundColor: Colors.white,
-                    // fixedSize: const Size(200, 50),
-                    onPressed: () {},
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.apple,
-                            size: 40,
-                            color: AppColors.black,
-                          ),
-                          Text(
-                            'Continue with Apple',
-                            style: AppStyle.txtQuicksand
-                                .copyWith(color: AppColors.black),
-                          ),
-                        ],
-                      ),
-                    ))
+                  margin: const EdgeInsets.symmetric(vertical: 20),
+                  padding: const EdgeInsets.all(5),
+                  // margin: const EdgeInsets.symmetric(vertical: 20),
+                  // alignment: Alignment.center,
+                  backgroundColor: Colors.white,
+                  // fixedSize: const Size(200, 50),
+                  onPressed: () {},
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.apple,
+                          size: 40,
+                          color: AppColors.black,
+                        ),
+                        Text(
+                          'Continue with Apple',
+                          style: AppStyle.txtQuicksand
+                              .copyWith(color: AppColors.black),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

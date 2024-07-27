@@ -31,8 +31,9 @@ class ProductItem extends StatelessWidget {
           // width: 100.0.dynW,
           // padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: AppColors.homeItemBgClr()),
+            borderRadius: BorderRadius.circular(8),
+            color: AppColors.homeItemBgClr(),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -41,21 +42,23 @@ class ProductItem extends StatelessWidget {
                 child: Hero(
                   tag: product.id,
                   child: CustomImageView(
-                      onTap: () => Get.to(
-                          transition: Transition.fadeIn,
-                          () => ProductDetail(
-                                product: product,
-                                homeCtr: homeCtr,
-                              )),
-                      // padding: const EdgeInsets.only(top: 10),
-                      fit: BoxFit.cover,
-                      showForeGDeco: true,
-                      border:
-                          Border.all(color: AppColors.lightGrey.withAlpha(210)),
-                      radius: BorderRadius.circular(8),
-                      height: 150.0.dynH,
-                      width: 200.0.dynW,
-                      url: product.image),
+                    onTap: () => Get.to(
+                      transition: Transition.fadeIn,
+                      () => ProductDetail(
+                        product: product,
+                        homeCtr: homeCtr,
+                      ),
+                    ),
+                    // padding: const EdgeInsets.only(top: 10),
+                    fit: BoxFit.cover,
+                    showForeGDeco: true,
+                    border:
+                        Border.all(color: AppColors.lightGrey.withAlpha(210)),
+                    radius: BorderRadius.circular(8),
+                    height: 150.0.dynH,
+                    width: 200.0.dynW,
+                    url: product.image,
+                  ),
                 ),
               ),
               const Gap(10),

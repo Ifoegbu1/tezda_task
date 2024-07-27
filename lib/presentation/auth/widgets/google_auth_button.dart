@@ -46,10 +46,10 @@ class GoogleAuthButton extends StatelessWidget {
               ),
               Text(
                 'Continue with Google',
-                style: AppStyle.txtQuicksand
-                    .copyWith(fontSize: 15, color: Colors.black87
-                        // fontWeight: FontWeight.bold,
-                        ),
+                style: AppStyle.txtQuicksand.copyWith(
+                  fontSize: 15, color: Colors.black87,
+                  // fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
