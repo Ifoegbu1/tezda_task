@@ -1,7 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tezda_task/core/app_routes.dart';
+import 'package:tezda_task/presentation/auth/auth_controller.dart';
 import 'package:tezda_task/theme/app_style.dart';
 
 class SplasScreen extends StatefulWidget {
@@ -12,21 +11,14 @@ class SplasScreen extends StatefulWidget {
 }
 
 class _SplasScreenState extends State<SplasScreen> {
+  final authCtr = Get.find<AuthController>();
   @override
   void initState() {
     Future.delayed(
       2.seconds,
-      () => checkIfUserLoggedIn(),
+      () => authCtr.checkIfUserLoggedIn(),
     );
     super.initState();
-  }
-
-  void checkIfUserLoggedIn() {
-    if (FirebaseAuth.instance.currentUser != null) {
-      Get.offAllNamed(AppRoutes.bottomBar);
-    } else {
-      Get.offAllNamed(AppRoutes.auth);
-    }
   }
 
   @override

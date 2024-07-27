@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -5,24 +6,27 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tezda_task/app_widgets/generic_dialog.dart';
 import 'package:tezda_task/app_widgets/loading_button.dart';
+import 'package:tezda_task/core/app_const.dart';
 import 'package:tezda_task/core/app_routes.dart';
 import 'package:tezda_task/core/generics.dart';
 import 'package:tezda_task/core/services/storage_service.dart';
 import 'package:tezda_task/presentation/auth/screens/email_verification_sent.dart';
 import 'package:tezda_task/presentation/auth/screens/login_or_register.dart';
+import 'package:tezda_task/presentation/user/controller/user_controller.dart';
+import 'package:tezda_task/presentation/user/models/user_model.dart';
 import 'package:tezda_task/utils/app_functions.dart';
 
 class AuthController extends GetxController {
-  FirebaseAuth firebaseAuth;
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final userCtr = Get.find<UserController>();
   bool wantsToLogOut = false;
   User? user;
 
   late TextEditingController emailTxtCtr;
   late TextEditingController passwordCtr;
   late TextEditingController nameTxtCtr;
-  AuthController({
-    required this.firebaseAuth,
-  });
+  AuthController();
 
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
@@ -43,14 +47,19 @@ class AuthController extends GetxController {
   ) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailTxtCtr.text,
-        password: passwordCtr.text,
+        email: emailTxtCtr.text.trim(),
+        password: passwordCtr.text.trim(),
       );
 
       User? user = FirebaseAuth.instance.currentUser;
-      if (user != null && !user.emailVerified) {
-        await user.updateDisplayName(nameTxtCtr.text);
+      if (user != null) {
+        // await user.updateDisplayName(nameTxtCtr.text);
         await user.sendEmailVerification().then((value) async {
+          await saveUserInfo(user);
+          buttonStatus(
+            buttonStatusType: ButtonState.success,
+            buttonController: actionButtonController,
+          );
           delayedFunc(
             () => Get.to(
               () => const EmailSentVerificationScreen(),
@@ -59,11 +68,6 @@ class AuthController extends GetxController {
             2.seconds,
           );
         });
-
-        buttonStatus(
-          buttonStatusType: ButtonState.success,
-          buttonController: actionButtonController,
-        );
       } else {
         buttonStatus(
           buttonStatusType: ButtonState.error,
@@ -143,6 +147,8 @@ class AuthController extends GetxController {
           );
         }
       } else {
+        await userCtr.getUserInfo();
+
         buttonStatus(
           buttonStatusType: ButtonState.success,
           buttonController: actionButtonController,
@@ -219,7 +225,8 @@ class AuthController extends GetxController {
         final User? user = userCredential.user;
 
         if (user != null) {
-          googleLoginSuccess();
+          await saveUserInfo(user, true);
+          await googleLoginSuccess();
           // Successfully signed in
         }
       } on FirebaseAuthException catch (e) {
@@ -261,7 +268,8 @@ class AuthController extends GetxController {
   //   }
   // }
 
-  void googleLoginSuccess() {
+  Future<void> googleLoginSuccess() async {
+    await userCtr.getUserInfo();
     buttonStatus(
       buttonStatusType: ButtonState.success,
       buttonController: googleBtnCtr,
@@ -272,5 +280,36 @@ class AuthController extends GetxController {
         Get.offAllNamed(AppRoutes.bottomBar);
       },
     );
+  }
+
+  Future<void> saveUserInfo(User user, [bool isGoogleAuth = false]) async {
+    var userInfo =
+        await firestore.collection(AppConst.users).doc(user.uid).get();
+    if (!userInfo.exists) {
+          final userModel = UserModel(
+      displayName: isGoogleAuth ? user.displayName! : nameTxtCtr.text,
+      email: user.email!,
+      uid: user.uid,
+      creationTimestamp: user.metadata.creationTime,
+      lastSignInTimestamp: user.metadata.lastSignInTime,
+      phoneNumber: user.phoneNumber,
+      photoURL: user.photoURL,
+    );
+      await firestore.collection(AppConst.users).doc(user.uid).set(
+            userModel.toMap(),
+          );
+    }
+  }
+
+  
+
+  Future<void> checkIfUserLoggedIn() async {
+    firebaseAuth.currentUser?.reload();
+    if (firebaseAuth.currentUser != null) {
+    await  userCtr.getUserInfo();
+      Get.offAllNamed(AppRoutes.bottomBar);
+    } else {
+      Get.offAllNamed(AppRoutes.auth);
+    }
   }
 }

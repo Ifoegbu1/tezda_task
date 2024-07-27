@@ -119,7 +119,7 @@ firebaseErrorCode(BuildContext context, String code) {
     showElegantNotif(
       context,
       elegantNotifType: NotificationType.error,
-      title: 'User already exist',
+      title: 'User already exists',
       description:
           'Account already exist for the email. Please contact the admin',
     );

@@ -38,6 +38,11 @@ class ProductModel {
         "image": image,
         "rating": rating.toJson(),
       };
+
+  @override
+  String toString() {
+    return 'ProductModel(id: $id, title: $title, price: $price, description: $description, category: $category, image: $image, rating: $rating, isFav: $isFav)';
+  }
 }
 
 class Rating {
@@ -58,4 +63,7 @@ class Rating {
         "rate": rate,
         "count": count,
       };
+
+  @override
+  String toString() => 'Rating(rate: $rate, count: $count)';
 }

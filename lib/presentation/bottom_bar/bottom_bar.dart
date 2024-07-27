@@ -76,60 +76,63 @@ class _FluidBottomBarState extends State with SingleTickerProviderStateMixin {
       background: AppColors.lightGrey,
       textStyle: AppStyle.txtQuicksand.copyWith(color: Colors.black87),
       message: "Press back again to exit app",
-      child: GetBuilder<UserController>(builder: (_) {
-        return Scaffold(
-          // primary: true,
-          // backgroundColor: Colors.transparent,
-          extendBody: true,
-          body: _child!,
-          bottomNavigationBar: FluidNavBar(
-            icons: [
-              FluidNavBarIcon(
-                svgPath: AppAssets.ASSETS_ICONS_HOME_SVG,
-                backgroundColor: Colors.transparent,
-
-                // backgroundColor: Color(0xFF4285F4),
-                extras: {"label": "home"},
-              ),
-              FluidNavBarIcon(
-                icon: CupertinoIcons.heart,
-                backgroundColor: Colors.transparent,
-                // backgroundColor: Color(0xFFEC4134)
-                extras: {"label": "favorites"},
-              ),
-              FluidNavBarIcon(
-                svgPath: AppAssets.ASSETS_ICONS_SHOPPING_BAG_SVG,
-                backgroundColor: Colors.transparent,
-
-                // backgroundColor: Color(0xFFFCBA02),
-                extras: {"label": "cart"},
-              ),
-              FluidNavBarIcon(
-                svgPath: AppAssets.ASSETS_ICONS_USER_SVG,
-                backgroundColor: Colors.transparent,
-
-                // backgroundColor: Color(0xFF34A950),
-                extras: {"label": "person"},
-              ),
-            ],
-            onChange: _handleNavigationChange,
-            style: FluidNavBarStyle(
+      child: GetBuilder<UserController>(
+        builder: (_) {
+          return Scaffold(
+            // primary: true,
+            // backgroundColor: Colors.transparent,
+            extendBody: true,
+            body: _child!,
+            bottomNavigationBar: FluidNavBar(
+              icons: [
+                FluidNavBarIcon(
+                  svgPath: AppAssets.ASSETS_ICONS_HOME_SVG,
+                  backgroundColor: Colors.transparent,
+    
+                  // backgroundColor: Color(0xFF4285F4),
+                  extras: {"label": "home"},
+                ),
+                FluidNavBarIcon(
+                  icon: CupertinoIcons.heart,
+                  backgroundColor: Colors.transparent,
+                  // backgroundColor: Color(0xFFEC4134)
+                  extras: {"label": "favorites"},
+                ),
+                FluidNavBarIcon(
+                  svgPath: AppAssets.ASSETS_ICONS_SHOPPING_BAG_SVG,
+                  backgroundColor: Colors.transparent,
+    
+                  // backgroundColor: Color(0xFFFCBA02),
+                  extras: {"label": "cart"},
+                ),
+                FluidNavBarIcon(
+                  svgPath: AppAssets.ASSETS_ICONS_USER_SVG,
+                  backgroundColor: Colors.transparent,
+    
+                  // backgroundColor: Color(0xFF34A950),
+                  extras: {"label": "person"},
+                ),
+              ],
+              onChange: _handleNavigationChange,
+              style: FluidNavBarStyle(
                 iconUnselectedForegroundColor: AppColors.bottomBarIconClr(),
                 iconSelectedForegroundColor: AppColors.lightBlue,
                 // barBackgroundColor: AppColors.lightGrey.withOpacity(0.5),
-
+    
                 //          // iconUnselectedForegroundColor: Colors.white,
                 // iconSelectedForegroundColor: AppColors.lightBlue,
-                barBackgroundColor: AppColors.bottomBarBgClr(),),
-            scaleFactor: 1,
-            defaultIndex: 0,
-            itemBuilder: (icon, item) => Semantics(
-              label: icon.extras!["label"],
-              child: item,
+                barBackgroundColor: AppColors.bottomBarBgClr(),
+              ),
+              scaleFactor: 1,
+              defaultIndex: 0,
+              itemBuilder: (icon, item) => Semantics(
+                label: icon.extras!["label"],
+                child: item,
+              ),
             ),
-          ),
-        );
-      },),
+          );
+        },
+      ),
     );
   }
 

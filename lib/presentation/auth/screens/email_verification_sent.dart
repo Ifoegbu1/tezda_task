@@ -56,7 +56,8 @@ class _EmailSentVerificationScreenState
             Text(
               "We've sent you an email verification",
               textAlign: TextAlign.center,
-              style: AppStyle.txtQuicksand.copyWith(fontSize: 20.0.dynFont),
+              style: AppStyle.txtQuicksand
+                  .copyWith(fontSize: 20.0.dynFont, color: Colors.grey),
             ),
             SizedBox(height: 150.0.dynH),
             CustomElevatedButton(

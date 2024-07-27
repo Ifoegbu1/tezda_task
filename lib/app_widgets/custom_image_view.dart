@@ -6,6 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tezda_task/theme/app_style.dart';
 import 'package:tezda_task/utils/app_functions.dart';
 
 class CustomImageView extends StatelessWidget {
@@ -26,7 +27,7 @@ class CustomImageView extends StatelessWidget {
   final double? width;
   final Color? color;
   final BoxFit? fit;
-  final bool? isProfile;
+  final bool isProfile;
   final String placeHolder;
   final Alignment? alignment;
   final VoidCallback? onTap;
@@ -35,6 +36,7 @@ class CustomImageView extends StatelessWidget {
   final BorderRadius? radius;
   final BoxBorder? border;
   final Uint8List? bytes;
+  final String? placeHolderText;
 
   ///a [CustomImageView] it can be used for showing any type of images
   /// it will shows the placeholder image if image is not found on network image
@@ -58,6 +60,7 @@ class CustomImageView extends StatelessWidget {
     this.radius,
     this.border,
     this.bytes,
+    this.placeHolderText,
   });
 
   @override
@@ -176,19 +179,10 @@ class CustomImageView extends StatelessWidget {
                 isDarkMode() ? Colors.grey.shade800 : Colors.grey.shade100,
           ),
         ),
-        errorWidget: (context, url, error) =>
-
-            //  Image.asset(
-            //   placeHolder,
-            //   height: height,
-            //   width: width,
-            //   fit: fit ?? BoxFit.cover,
-            // ),
-
-            SizedBox(
+        errorWidget: (context, url, error) => SizedBox(
           height: height,
           width: width,
-          child: Icon(!isProfile! ? Icons.broken_image_rounded : Icons.person),
+          child: const Icon(Icons.broken_image_rounded),
         ),
       );
     } else if (imagePath != null && imagePath!.isNotEmpty) {
@@ -209,13 +203,11 @@ class CustomImageView extends StatelessWidget {
         color: color,
       );
     }
-    return SizedBox(
-      height: height,
-      width: width,
-      child: Icon(
-        !isProfile! ? Icons.broken_image_rounded : Icons.person,
-        size: width,
-      ),
-    );
+    return isProfile
+        ? Text(
+            placeHolderText ?? '',
+            style: AppStyle.txtQuicksand,
+          )
+        : const SizedBox.shrink();
   }
 }

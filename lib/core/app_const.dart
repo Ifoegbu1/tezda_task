@@ -3,4 +3,8 @@ class AppConst {
 
   //STORAGE keys
   static const String favProductsKey = 'favProductsKey';
+
+  //FIRESTORE
+
+  static const String users = 'users';
 }

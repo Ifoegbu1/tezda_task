@@ -25,7 +25,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<UserController>(
       initState: (state) {
-        nameTxtCtr = TextEditingController(text: userCtr.user.displayName);
+        nameTxtCtr = TextEditingController(text: userCtr.userInfo!.displayName);
       },
       dispose: (state) {
         nameTxtCtr.dispose();
@@ -53,8 +53,9 @@ class ProfileScreen extends StatelessWidget {
                 const Gap(40),
                 profileTiles(
                   onTap: () {
-                    nameTxtCtr =
-                        TextEditingController(text: userCtr.user.displayName);
+                    nameTxtCtr = TextEditingController(
+                      text: userCtr.userInfo!.displayName,
+                    );
 
                     showModalBottomSheet(
                       shape: const RoundedRectangleBorder(
@@ -75,7 +76,7 @@ class ProfileScreen extends StatelessWidget {
                   },
                   title: 'Full Name',
                   isThreeLine: true,
-                  subTiitle: userCtr.user.displayName!,
+                  subTiitle: userCtr.userInfo!.displayName,
                   leading: CustomImageView(
                     svgPath: AppAssets.ASSETS_ICONS_USER_SVG,
                     color: AppColors.tabTextClr(),
@@ -88,7 +89,7 @@ class ProfileScreen extends StatelessWidget {
                   title: 'Email Address',
                   showEdit: false,
                   isThreeLine: false,
-                  subTiitle: userCtr.user.email!,
+                  subTiitle: userCtr.userInfo!.email,
                 ),
                 const Gap(20),
                 profileTiles(

@@ -32,8 +32,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(builder: (_) {
-      return Scaffold(
+    return GetBuilder<HomeController>(
+      builder: (_) {
+        return Scaffold(
           appBar: AppBar(
             centerTitle: false,
             toolbarHeight: 70.0.dynH,
@@ -51,9 +52,11 @@ class _HomeState extends State<Home> {
                     tag: 'profile-pic',
                     child: CircleAvatar(
                       child: CustomImageView(
+                        placeHolderText:
+                            userCtr.userInfo!.displayName.characters.first,
                         isProfile: true,
                         fit: BoxFit.cover,
-                        url: userCtr.user.photoURL,
+                        url: userCtr.userInfo!.photoURL,
                         height: 100.0.dynH,
                         width: 100.0.dynW,
                         radius: BorderRadius.circular(40),
@@ -78,102 +81,125 @@ class _HomeState extends State<Home> {
                 Text(
                   widget.isFav ? 'Your Favourites' : 'Tezda Products',
                   style: AppStyle.txtQuicksand.copyWith(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 30,
-                      decorationColor: AppColors.lightBlue,
-                      decorationStyle: TextDecorationStyle.solid,
-                      decoration: TextDecoration.underline,),
+                    fontWeight: FontWeight.w800,
+                    fontSize: 30,
+                    decorationColor: AppColors.lightBlue,
+                    decorationStyle: TextDecorationStyle.solid,
+                    decoration: TextDecoration.underline,
+                  ),
                 ),
               ],
             ),
           ),
-          body: homeCtr.isLoaded
-              ? homeCtr.getProductsList(widget.isFav).isNotEmpty
-                  ? Builder(builder: (context) {
-                      if (widget.isFav) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
-                          child: ProductsGrid(isFav: widget.isFav),
-                        );
-                      }
+          body: RefreshIndicator(
+            onRefresh: () async {
+              await homeCtr.getProducts();
+            },
+            child: homeCtr.isLoaded
+                ? homeCtr.getProductsList(widget.isFav).isNotEmpty
+                    ? Builder(
+                        builder: (context) {
+                          if (widget.isFav) {
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: ProductsGrid(isFav: widget.isFav),
+                            );
+                          }
 
-                      return Theme(
-                        data: Theme.of(context).copyWith(
-                          tabBarTheme: const TabBarTheme(
-                              dividerColor: Colors.transparent,),
-                        ),
-                        child: CustomContainedTabBarView(
-                          callOnChangeWhileIndexIsChanging: true,
-                          initialIndex: widget.isFav
-                              ? homeCtr.selectedFavTab
-                              : homeCtr.selectedHomeTab,
-                          key: tabKey,
-                          tabBarViewProperties: const TabBarViewProperties(
-                              physics: NeverScrollableScrollPhysics(),),
-                          tabBarProperties: TabBarProperties(
-                              position: TabBarPosition.top,
-                              indicatorSize: TabBarIndicatorSize.label,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              margin: const EdgeInsets.all(10),
-                              labelStyle: AppStyle.txtQuicksand.copyWith(
-                                  fontSize: 14, fontWeight: FontWeight.w600,),
-                              labelColor: Colors.white,
-                              indicator: ContainerTabIndicator(
-                                height: 22.0.dynH,
-                                width: 83.0.dynW,
-                                radius: BorderRadius.circular(71),
-                                color: AppColors.lightBlue,
+                          return Theme(
+                            data: Theme.of(context).copyWith(
+                              tabBarTheme: const TabBarTheme(
+                                dividerColor: Colors.transparent,
                               ),
-                              unselectedLabelColor: AppColors.tabTextClr(),),
-                          tabs: List.generate(
-                              homeCtr.getCategories(widget.isFav).length,
-                              (index) => Text(getFirstWord(
-                                  homeCtr.getCategories(widget.isFav)[index],),),),
-                          views: List.generate(
-                              homeCtr.getCategories(widget.isFav).length,
-                              (index) => ProductsGrid(
-                                    isFav: widget.isFav,
-                                  ),),
-                          onChange: (index) {
-                            tezdaLog('ONCHANGE ${homeCtr.favCategories}');
-                            tezdaLog('ONCHANGE${homeCtr.selectedFavTab}');
-                            if (widget.isFav) {
-                              homeCtr.selectedFavTab = index;
-                            } else {
-                              homeCtr.selectedHomeTab = index;
-                            }
+                            ),
+                            child: CustomContainedTabBarView(
+                              callOnChangeWhileIndexIsChanging: true,
+                              initialIndex: widget.isFav
+                                  ? homeCtr.selectedFavTab
+                                  : homeCtr.selectedHomeTab,
+                              key: tabKey,
+                              tabBarViewProperties: const TabBarViewProperties(
+                                physics: NeverScrollableScrollPhysics(),
+                              ),
+                              tabBarProperties: TabBarProperties(
+                                position: TabBarPosition.top,
+                                indicatorSize: TabBarIndicatorSize.label,
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                margin: const EdgeInsets.all(10),
+                                labelStyle: AppStyle.txtQuicksand.copyWith(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                labelColor: Colors.white,
+                                indicator: ContainerTabIndicator(
+                                  height: 22.0.dynH,
+                                  width: 83.0.dynW,
+                                  radius: BorderRadius.circular(71),
+                                  color: AppColors.lightBlue,
+                                ),
+                                unselectedLabelColor: AppColors.tabTextClr(),
+                              ),
+                              tabs: List.generate(
+                                homeCtr.getCategories(widget.isFav).length,
+                                (index) => Text(
+                                  getFirstWord(
+                                    homeCtr.getCategories(widget.isFav)[index],
+                                  ),
+                                ),
+                              ),
+                              views: List.generate(
+                                homeCtr.getCategories(widget.isFav).length,
+                                (index) => ProductsGrid(
+                                  isFav: widget.isFav,
+                                ),
+                              ),
+                              onChange: (index) {
+                                tezdaLog('ONCHANGE ${homeCtr.favCategories}');
+                                tezdaLog('ONCHANGE${homeCtr.selectedFavTab}');
+                                if (widget.isFav) {
+                                  homeCtr.selectedFavTab = index;
+                                } else {
+                                  homeCtr.selectedHomeTab = index;
+                                }
 
-                            homeCtr.filterProducts(widget.isFav);
-                          },
+                                homeCtr.filterProducts(widget.isFav);
+                              },
+                            ),
+                          );
+                        },
+                      )
+                    : Center(
+                        child: Text(
+                          widget.isFav
+                              ? 'You have no favourites right now'
+                              : 'No products available at the moment',
+                          style: AppStyle.txtQuicksand,
                         ),
-                      );
-                    },)
-                  : Center(
-                      child: Text(
-                        widget.isFav
-                            ? 'You have no favourites right now'
-                            : 'No products available at the moment',
-                        style: AppStyle.txtQuicksand,
+                      )
+                : Center(
+                    child: SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: SizedBox(
+                        width: 30,
+                        height: 30,
+                        child: LoadingIndicator(
+                          indicatorType: Indicator.ballPulseSync,
+                          colors: [
+                            Colors.black,
+                            AppColors.lightGrey,
+                            AppColors.lightBlue,
+                          ],
+                          strokeWidth: 2,
+                          backgroundColor: Colors.transparent,
+                          pathBackgroundColor: Colors.transparent,
+                        ),
                       ),
-                    )
-              : Center(
-                  child: SizedBox(
-                    width: 30,
-                    height: 30,
-                    child: LoadingIndicator(
-                      indicatorType: Indicator.ballPulseSync,
-                      colors: [
-                        Colors.black,
-                        AppColors.lightGrey,
-                        AppColors.lightBlue,
-                      ],
-                      strokeWidth: 2,
-                      backgroundColor: Colors.transparent,
-                      pathBackgroundColor: Colors.transparent,
                     ),
                   ),
-                ),);
-    },);
+          ),
+        );
+      },
+    );
   }
 }

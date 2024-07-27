@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,7 +19,7 @@ class UserImageContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    User user = userCtr.user;
+    final user = userCtr.userInfo;
 
     return Stack(
       fit: StackFit.passthrough,
@@ -46,8 +45,10 @@ class UserImageContainer extends StatelessWidget {
                       )
                     : CustomImageView(
                         isProfile: true,
+                        placeHolderText:
+                            userCtr.userInfo!.displayName.characters.first,
                         fit: BoxFit.cover,
-                        url: user.photoURL,
+                        url: user!.photoURL,
                         height: 120.0.dynH,
                         width: user.photoURL != null ? 140.0.dynW : 50,
                         radius: BorderRadius.circular(40),

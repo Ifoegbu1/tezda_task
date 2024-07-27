@@ -25,7 +25,7 @@ class AccountPage extends StatelessWidget {
         final userCtr = Get.find<UserController>();
         final authCtr = Get.find<AuthController>();
 
-        User user = userCtr.user;
+        final user = userCtr.userInfo;
         return ThemeSwitchingArea(
           child: Scaffold(
             appBar: AppBar(
@@ -68,9 +68,11 @@ class AccountPage extends StatelessWidget {
                                       child: CircleAvatar(
                                         backgroundColor: AppColors.lightBlue,
                                         child: CustomImageView(
+                                          placeHolderText: userCtr.userInfo!
+                                              .displayName.characters.first,
                                           isProfile: true,
                                           fit: BoxFit.cover,
-                                          url: user.photoURL,
+                                          url: user!.photoURL,
                                           height: 130.0.dynH,
                                           width: user.photoURL != null
                                               ? 140.0.dynW
@@ -95,7 +97,7 @@ class AccountPage extends StatelessWidget {
                                   height: 10,
                                 ),
                                 Text(
-                                  user.displayName!,
+                                  user.displayName,
                                   style: AppStyle.txtQuicksand.copyWith(
                                     color: AppColors.lightBlue,
                                     fontWeight: FontWeight.w600,
@@ -103,7 +105,7 @@ class AccountPage extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  user.email!,
+                                  user.email,
                                   style: AppStyle.txtQuicksand.copyWith(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 12,
@@ -202,7 +204,13 @@ class AccountPage extends StatelessWidget {
                                 .copyWith(fontWeight: FontWeight.w800),
                           ),
                         ),
-                        const AccountItem(
+                        AccountItem(
+                          onTap: () {
+                            tezdaLog(
+                              FirebaseAuth.instance.currentUser!.metadata
+                                  .lastSignInTime,
+                            );
+                          },
                           title: 'Change Password',
                           icon: Icons.lock,
                         ),

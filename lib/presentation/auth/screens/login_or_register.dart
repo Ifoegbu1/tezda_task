@@ -44,6 +44,7 @@ class _LoginOrRegState extends State<LoginOrReg> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -77,7 +78,7 @@ class _LoginOrRegState extends State<LoginOrReg> {
                   ),
                   Text(
                     widget.isSignUp
-                        ? 'Sign up for your Tazda account'
+                        ? 'Sign up for your Tezda account'
                         : 'Sign into your account',
                     style: AppStyle.txtQuicksand
                         .copyWith(color: Colors.grey, fontSize: 25),
@@ -109,6 +110,7 @@ class _LoginOrRegState extends State<LoginOrReg> {
                           BorderSide(color: AppColors.fromHex('#9AA5AD')),
                     ),
                   CustomTextFormField(
+                    textInputType: TextInputType.emailAddress,
                     controller: widget.authCtr.emailTxtCtr,
                     prefix: Icon(
                       Icons.email,
@@ -233,6 +235,7 @@ class _LoginOrRegState extends State<LoginOrReg> {
                       ),
                     ),
                   ),
+                  const Gap(20),
                 ],
               ),
             ),
