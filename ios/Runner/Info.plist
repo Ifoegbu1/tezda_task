@@ -11,9 +11,9 @@
     <key>CFBundleIdentifier</key>
     <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
     <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
     <key>GIDServerClientID</key>
 	  <string>489204131538-u385ifh2bkns7aho31pfnc28ik70u8g9.apps.googleusercontent.com</string>
-    <string>6.0</string>
     <key>CFBundleName</key>
     <string>tezda_task</string>
     <key>CFBundlePackageType</key>
@@ -31,11 +31,11 @@
     <key>UIMainStoryboardFile</key>
     <string>Main</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>We need access to your photo library to allow you to upload pictures.</string>
+    <string>Tezda Store(test) needs access to your photo library to allow you to upload product images and share your shopping experiences.</string>
     <key>NSCameraUsageDescription</key>
-    <string>We need access to your camera to allow you to take photos directly within the app.</string>
+    <string>Tezda Store(test) needs access to your camera to allow you to take photos of products directly within the app.</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>We need access to your microphone to record audio with your videos.</string>
+    <string>Tezda Store(test) needs access to your microphone to record audio for product reviews and video uploads.</string>
     <key>UISupportedInterfaceOrientations</key>
     <array>
       <string>UIInterfaceOrientationPortrait</string>
