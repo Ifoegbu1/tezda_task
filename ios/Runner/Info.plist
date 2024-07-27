@@ -11,6 +11,8 @@
     <key>CFBundleIdentifier</key>
     <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
     <key>CFBundleInfoDictionaryVersion</key>
+    <key>GIDServerClientID</key>
+	  <string>489204131538-u385ifh2bkns7aho31pfnc28ik70u8g9.apps.googleusercontent.com</string>
     <string>6.0</string>
     <key>CFBundleName</key>
     <string>tezda_task</string>
@@ -28,6 +30,12 @@
     <string>LaunchScreen</string>
     <key>UIMainStoryboardFile</key>
     <string>Main</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>We need access to your photo library to allow you to upload pictures.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>We need access to your camera to allow you to take photos directly within the app.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>We need access to your microphone to record audio with your videos.</string>
     <key>UISupportedInterfaceOrientations</key>
     <array>
       <string>UIInterfaceOrientationPortrait</string>
@@ -45,5 +53,18 @@
     <true/>
     <key>UIApplicationSupportsIndirectInputEvents</key>
     <true/>
+<!-- Google Sign-in Section -->
+<key>CFBundleURLTypes</key>
+<array>
+	<dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<string>com.googleusercontent.apps.489204131538-u385ifh2bkns7aho31pfnc28ik70u8g9</string>
+		</array>
+	</dict>
+</array>
+<!-- End of the Google Sign-in Section -->
   </dict>
 </plist>
