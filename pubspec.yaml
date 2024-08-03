@@ -37,6 +37,7 @@ dependencies:
   device_preview_screenshot: ^1.0.0
   double_back_to_close: ^2.0.0
   elegant_notification: ^2.2.2
+  firebase_app_check: ^0.3.0+4
   firebase_auth: ^5.1.2
   firebase_core: ^3.2.0
   firebase_storage: ^12.1.1
@@ -62,6 +63,7 @@ dependencies:
   shared_preferences: ^2.2.3
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
   flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
@@ -103,3 +105,8 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_launcher_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/icons/icon.png"
+  min_sdk_android: 21

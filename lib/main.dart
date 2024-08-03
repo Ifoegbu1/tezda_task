@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:device_preview_screenshot/device_preview_screenshot.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,6 +22,11 @@ Future<void> main() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
   }
+
+  await FirebaseAppCheck.instance.activate(
+    androidProvider: AndroidProvider.playIntegrity,
+  );
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);

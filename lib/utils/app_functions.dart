@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -95,4 +96,17 @@ String formatDate(DateTime dateTime) {
 
   // Combine day with suffix and month, year
   return "$dayWithSuffix of ${DateFormat("MMMM").format(dateTime)}, ${DateFormat("yyyy").format(dateTime)}";
+}
+
+List<BoxShadow> containerElevation() {
+  return [
+    BoxShadow(
+      color: Colors.white30.withOpacity(0.1),
+      blurRadius: 6.0,
+      offset: const Offset(
+        5,
+        5,
+      ),
+    ),
+  ];
 }

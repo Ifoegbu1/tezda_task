@@ -202,6 +202,7 @@ class AuthController extends GetxController {
   }
 
   Future<void> signInWithGoogle(BuildContext context) async {
+
     try {
       await _googleSignIn.signOut();
 
@@ -230,6 +231,8 @@ class AuthController extends GetxController {
           // Successfully signed in
         }
       } on FirebaseAuthException catch (e) {
+        tezdaLog(e);
+
         buttonStatus(
           buttonStatusType: ButtonState.error,
           buttonController: googleBtnCtr,
@@ -286,27 +289,27 @@ class AuthController extends GetxController {
     var userInfo =
         await firestore.collection(AppConst.users).doc(user.uid).get();
     if (!userInfo.exists) {
-          final userModel = UserModel(
-      displayName: isGoogleAuth ? user.displayName! : nameTxtCtr.text,
-      email: user.email!,
-      uid: user.uid,
-      creationTimestamp: user.metadata.creationTime,
-      lastSignInTimestamp: user.metadata.lastSignInTime,
-      phoneNumber: user.phoneNumber,
-      photoURL: user.photoURL,
-    );
+      final userModel = UserModel(
+        displayName: isGoogleAuth ? user.displayName! : nameTxtCtr.text,
+        email: user.email!,
+        uid: user.uid,
+        creationTimestamp: user.metadata.creationTime,
+        lastSignInTimestamp: user.metadata.lastSignInTime,
+        phoneNumber: user.phoneNumber,
+        photoURL: user.photoURL,
+      );
       await firestore.collection(AppConst.users).doc(user.uid).set(
             userModel.toMap(),
           );
     }
   }
 
-  
-
   Future<void> checkIfUserLoggedIn() async {
+    // Get.offAllNamed(AppRoutes.auth);
+
     firebaseAuth.currentUser?.reload();
     if (firebaseAuth.currentUser != null) {
-    await  userCtr.getUserInfo();
+      await userCtr.getUserInfo();
       Get.offAllNamed(AppRoutes.bottomBar);
     } else {
       Get.offAllNamed(AppRoutes.auth);
