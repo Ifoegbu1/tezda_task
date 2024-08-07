@@ -1,9 +1,11 @@
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 import 'package:tezda_task/app_widgets/custom_container_tab.dart';
 import 'package:tezda_task/app_widgets/custom_image_view.dart';
+import 'package:tezda_task/app_widgets/loading_shimmer.dart';
 import 'package:tezda_task/presentation/home/controller/home_ctr.dart';
 import 'package:tezda_task/presentation/home/widgets/products_grid.dart';
 import 'package:tezda_task/presentation/user/controller/user_controller.dart';
@@ -36,6 +38,7 @@ class _HomeState extends State<Home> {
       builder: (_) {
         return Scaffold(
           appBar: AppBar(
+            forceMaterialTransparency: true,
             centerTitle: false,
             toolbarHeight: 70.0.dynH,
             actions: [
@@ -93,7 +96,9 @@ class _HomeState extends State<Home> {
           ),
           body: RefreshIndicator(
             onRefresh: () async {
-              await homeCtr.getProducts();
+              if (!widget.isFav) {
+                await homeCtr.getProducts();
+              }
             },
             child: homeCtr.isLoaded
                 ? homeCtr.getProductsList(widget.isFav).isNotEmpty
@@ -124,8 +129,9 @@ class _HomeState extends State<Home> {
                               tabBarProperties: TabBarProperties(
                                 position: TabBarPosition.top,
                                 indicatorSize: TabBarIndicatorSize.label,
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                ),
                                 margin: const EdgeInsets.all(10),
                                 labelStyle: AppStyle.txtQuicksand.copyWith(
                                   fontSize: 14,
@@ -144,7 +150,9 @@ class _HomeState extends State<Home> {
                                 homeCtr.getCategories(widget.isFav).length,
                                 (index) => Text(
                                   getFirstWord(
-                                    homeCtr.getCategories(widget.isFav)[index],
+                                    homeCtr.getCategories(
+                                      widget.isFav,
+                                    )[index],
                                   ),
                                 ),
                               ),
@@ -155,8 +163,12 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               onChange: (index) {
-                                tezdaLog('ONCHANGE ${homeCtr.favCategories}');
-                                tezdaLog('ONCHANGE${homeCtr.selectedFavTab}');
+                                tezdaLog(
+                                  'ONCHANGE ${homeCtr.favCategories}',
+                                );
+                                tezdaLog(
+                                  'ONCHANGE${homeCtr.selectedFavTab}',
+                                );
                                 if (widget.isFav) {
                                   homeCtr.selectedFavTab = index;
                                 } else {
@@ -170,31 +182,64 @@ class _HomeState extends State<Home> {
                         },
                       )
                     : Center(
-                        child: Text(
-                          widget.isFav
-                              ? 'You have no favourites right now'
-                              : 'No products available at the moment',
-                          style: AppStyle.txtQuicksand,
+                        child: SingleChildScrollView(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          child: Text(
+                            widget.isFav
+                                ? 'You have no favourites right now'
+                                : 'No products available at the moment',
+                            style: AppStyle.txtQuicksand,
+                          ),
                         ),
                       )
-                : Center(
-                    child: SingleChildScrollView(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      child: SizedBox(
-                        width: 30,
-                        height: 30,
-                        child: LoadingIndicator(
-                          indicatorType: Indicator.ballPulseSync,
-                          colors: [
-                            Colors.black,
-                            AppColors.lightGrey,
-                            AppColors.lightBlue,
-                          ],
-                          strokeWidth: 2,
-                          backgroundColor: Colors.transparent,
-                          pathBackgroundColor: Colors.transparent,
+                : Padding(
+                    padding: const EdgeInsets.only(
+                      top: 20,
+                      left: 15,
+                      right: 15,
+                    ),
+                    child: Column(
+                      children: [
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(
+                              4,
+                              (index) {
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                    right: index != 3 ? 10.0 : 0,
+                                  ),
+                                  child: LoadingShimmer(
+                                    height: 22.0.dynH,
+                                    width: 73.0.dynW,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
                         ),
-                      ),
+                        const Gap(20),
+                        Expanded(
+                          child: StaggeredGridView.countBuilder(
+                            itemCount: 10,
+                            shrinkWrap: true,
+                            crossAxisCount: 4,
+                            crossAxisSpacing: 20,
+                            mainAxisSpacing: 20,
+                            itemBuilder: (context, index) {
+                              return const LoadingShimmer(
+                                height: 210,
+                                width: 150,
+                              );
+                            },
+                            staggeredTileBuilder: (index) {
+                              return const StaggeredTile.fit(2);
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
           ),

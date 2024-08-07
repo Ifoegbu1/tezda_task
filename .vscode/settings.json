@@ -41,7 +41,7 @@
     "files.watcherExclude": {
         "**/.fvm": true
     },
-    "workbench.iconTheme": "material-icon-theme",
+    "workbench.iconTheme": "a-file-icon-vscode",
     "window.zoomLevel": -1,
     "php.suggest.basic": false,
     "php.validate.enable": false,

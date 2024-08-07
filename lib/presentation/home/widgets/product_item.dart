@@ -12,7 +12,7 @@ import 'package:tezda_task/utils/app_colors.dart';
 import 'package:tezda_task/utils/app_functions.dart';
 
 class ProductItem extends StatelessWidget {
-  const ProductItem({
+const ProductItem({
     super.key,
     required this.product,
     required this.homeCtr,

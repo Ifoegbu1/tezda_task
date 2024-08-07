@@ -37,7 +37,8 @@ class HomeController extends GetxController {
 
   Future<void> getProducts() async {
     isLoaded = false;
-    selectedHomeTab = 0;
+    update();
+    // selectedHomeTab = 0;
 
     try {
       Uri uri = Uri.parse('${AppConst.baseUrl}products');
@@ -56,6 +57,8 @@ class HomeController extends GetxController {
           await getProductsCategory();
           filterProducts(false);
           getFavProducts();
+
+          
 
           isLoaded = true;
           update();

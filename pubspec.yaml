@@ -61,6 +61,7 @@ dependencies:
   photo_view: ^0.15.0
   rename_app: ^1.6.1
   shared_preferences: ^2.2.3
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
